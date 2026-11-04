@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>ties</title>
+<meta name="description" content="On-chain supply of tokenized money market funds, chain by chain, read every night from two independent providers.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Lab-notebook ledger: one column, summary first, then one ledger per fund, method last. Plex Sans + Plex Mono as one instrument family; ink of the post images, one teal for verification. */
+:root {
+  --bg: oklch(0.99 0 0); --fg: oklch(0.18 0 0); --fg-2: oklch(0.43 0.004 200); --rule: oklch(0.905 0.003 200);
+  --wash: oklch(0.962 0.004 200); --ok: oklch(0.47 0.09 185); --warn: oklch(0.55 0.19 32);
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: oklch(0.165 0.003 200); --fg: oklch(0.955 0 0); --fg-2: oklch(0.74 0.006 200); --rule: oklch(0.29 0.004 200);
+  --wash: oklch(0.215 0.004 200); --ok: oklch(0.78 0.1 180); --warn: oklch(0.72 0.16 35); color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: oklch(0.165 0.003 200); --fg: oklch(0.955 0 0); --fg-2: oklch(0.74 0.006 200); --rule: oklch(0.29 0.004 200);
+  --wash: oklch(0.215 0.004 200); --ok: oklch(0.78 0.1 180); --warn: oklch(0.72 0.16 35); color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 400 1rem/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+.page { max-width: 64rem; margin: 0 auto; padding-block: 1.5rem 3rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 4rem; }
+a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 0.2em; transition: text-decoration-color 150ms ease; }
+@media (hover: hover) and (pointer: fine) { a:hover { text-decoration-color: currentColor; } }
+:focus-visible { outline: 2px solid var(--ok); outline-offset: 3px; border-radius: 2px; }
+
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 1.5rem;
+  border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+.mark { font-weight: 700; font-size: 1.375rem; letter-spacing: -0.03em; margin: 0; }
+.mark span { font-weight: 400; font-size: 0.9375rem; letter-spacing: 0; color: var(--fg-2); margin-left: 0.625rem; }
+.stamp { margin: 0; color: var(--fg-2); font-size: 0.875rem; }
+
+.intro { display: grid; gap: 1rem; }
+h1 { font-size: 2.75rem; line-height: 1.06; font-weight: 700; letter-spacing: -0.035em; margin: 0; max-width: 18ch; text-wrap: balance; }
+.lede { color: var(--fg-2); max-width: 62ch; margin: 0; font-size: 1.0625rem; text-wrap: pretty; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+th, td { padding: 0.875rem 1rem 0.875rem 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: middle; }
+th:last-child, td:last-child { padding-right: 0; }
+thead th { font-size: 0.8125rem; color: var(--fg-2); font-weight: 500; padding-block: 0.5rem; }
+tbody tr { transition: background-color 150ms ease; }
+@media (hover: hover) and (pointer: fine) { tbody tr:hover { background: var(--wash); } }
+.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+td.num { font-weight: 600; }
+.summary th[scope="row"] { font-weight: 600; }
+
+.fund { display: grid; gap: 1.25rem; min-width: 0; scroll-margin-top: 1.5rem; }
+.fund-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1rem 2rem;
+  border-bottom: 2px solid var(--fg); padding-bottom: 1.25rem; }
+.who { display: grid; gap: 0.375rem; justify-items: start; min-width: 0; }
+h2 { font-size: 1.625rem; line-height: 1.15; margin: 0; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+.full { margin: 0; color: var(--fg-2); font-size: 0.9375rem; }
+.pill { display: inline-flex; align-items: center; gap: 0.375rem; margin: 0.375rem 0 0; padding: 0.25rem 0.75rem 0.25rem 0.5rem;
+  border-radius: 999px; font-size: 0.8125rem; font-weight: 500; background: var(--wash); }
+.pill.ok, .conf.ok { color: var(--ok); }
+.pill.warn, .conf.warn, tr.flag td.num { color: var(--warn); }
+.ico { width: 1rem; height: 1rem; flex: none; }
+.total { text-align: right; display: grid; gap: 0.125rem; }
+.big { font-size: 2.125rem; font-weight: 700; letter-spacing: -0.02em; margin: 0; line-height: 1.1; }
+.unit, .delta, .note { margin: 0; color: var(--fg-2); font-size: 0.875rem; }
+.spark { width: 100%; max-width: 20rem; height: 3.5rem; display: block; }
+
+.scroll { overflow-x: auto; min-width: 0; }
+.ledger { min-width: 36rem; }
+.ledger tbody th { font-weight: 400; }
+.chain { display: block; font-weight: 600; }
+.cls { font-weight: 500; font-size: 0.75rem; color: var(--fg-2); background: var(--wash); border-radius: 4px; padding: 0.0625rem 0.375rem; margin-left: 0.25rem; }
+.how, .addr { display: block; font-family: var(--mono); font-size: 0.75rem; color: var(--fg-2); line-height: 1.5; }
+.share { width: 30%; }
+.share { white-space: nowrap; }
+.bar { display: inline-block; vertical-align: middle; width: calc(100% - 3.5rem); height: 0.375rem; background: var(--wash); border-radius: 999px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: calc(var(--w) * 100%); min-width: 2px; background: var(--fg); border-radius: inherit;
+  transform-origin: left center; animation: grow 700ms var(--ease-out) both; animation-delay: calc(var(--i) * 35ms); }
+.pct { display: inline-block; width: 3.5rem; text-align: right; font-variant-numeric: tabular-nums; color: var(--fg-2); font-size: 0.8125rem; }
+.conf { white-space: nowrap; font-size: 0.875rem; font-weight: 500; }
+.conf .ico { vertical-align: -0.2em; margin-right: 0.25rem; }
+@keyframes grow { from { transform: scaleX(0); } }
+
+.method { display: grid; gap: 1.25rem; border-top: 1px solid var(--rule); padding-top: 2rem; }
+.method h2 { font-size: 1.25rem; }
+.method dl { display: grid; grid-template-columns: 7rem 1fr; gap: 0.75rem 1.5rem; margin: 0; max-width: 46rem; }
+.method dt { font-weight: 600; }
+.method dd { margin: 0; color: var(--fg-2); }
+.method p { margin: 0; color: var(--fg-2); max-width: 62ch; text-wrap: pretty; }
+
+footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--rule); padding-top: 1rem;
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between; }
+
+@media (max-width: 40rem) {
+  .page { gap: 3rem; }
+  h1 { font-size: 2.125rem; }
+  .total { text-align: left; }
+  .big { font-size: 1.75rem; }
+  .method dl { grid-template-columns: 1fr; gap: 0.25rem; }
+  .method dd { margin-bottom: 0.75rem; }
+}
+@media (prefers-reduced-motion: reduce) { .bar i { animation: none; } tbody tr, a { transition: none; } }
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="top">
+    <p class="mark">ties<span>tokenized fund supply, read on-chain</span></p>
+    <p class="stamp">Read nightly. Last read <time datetime="2026-11-04T20:37:00+00:00" data-read="2026-11-04T20:37:00+00:00">4 Nov 2026, 20:37 UTC</time></p>
+  </header>
+  <section class="intro" aria-labelledby="q">
+    <h1 id="q">How many fund tokens exist right now?</h1>
+    <p class="lede">Tokenized money market funds live on many chains at once. ties reads each contract every night, from two independent providers, at finalized state, and adds it up. Token counts only: no prices, no NAV.</p>
+    <div class="scroll"><table class="summary">
+      <thead><tr><th scope="col">Fund</th><th scope="col" class="num">Tokens</th><th scope="col" class="num">Chains</th><th scope="col">Confirmed</th></tr></thead>
+      <tbody><tr><th scope="row"><a href="#buidl">BlackRock BUIDL</a></th><td class="num">1,899,719,830.20</td><td class="num">9</td><td class="conf warn"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 4.5v4.25M8 11.25v.25" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>9 of 10</td></tr><tr><th scope="row"><a href="#benji">Franklin BENJI</a></th><td class="num">1,103,438,040.48</td><td class="num">8</td><td class="conf warn"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 4.5v4.25M8 11.25v.25" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>7 of 8</td></tr></tbody>
+    </table></div>
+  </section>
+  
+<section class="fund" id="buidl" aria-labelledby="buidl-h">
+  <header class="fund-head">
+    <div class="who">
+      <h2 id="buidl-h">BlackRock BUIDL</h2>
+      <p class="full">BlackRock USD Institutional Digital Liquidity Fund. Tokenized by Securitize.</p>
+      <p class="pill warn"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 4.5v4.25M8 11.25v.25" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>1 of 10 contracts not confirmed by two providers</p>
+    </div>
+    <div class="total">
+      <p class="big num">1,899,719,830.20</p>
+      <p class="unit">tokens across 9 chains</p>
+      
+    </div>
+  </header>
+  <div class="history"><p class="note">One point per night from 2026-11-04. The trend line appears after the second read.</p></div>
+  <div class="scroll"><table class="ledger">
+    <thead><tr><th scope="col">Chain</th><th scope="col" class="num">Supply</th><th scope="col">Share of fund</th><th scope="col">Confirmed</th></tr></thead>
+    <tbody><tr class=""><th scope="row"><span class="chain">Solana</span><span class="how">mint supply · slot 465,438,363</span><span class="addr" title="GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr">GyWgeqpy…Mw6phr</span></th><td class="num">584,938,779.61</td><td class="share"><span class="bar"><i style="--w:0.3079;--i:0"></i></span><span class="pct">30.8%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Avalanche</span><span class="how">totalSupply() · block 99,434,872</span><span class="addr" title="0x53fc82f14f009009b440a706e31c9021e1196a2f">0x53fc82…196a2f</span></th><td class="num">416,606,973.17</td><td class="share"><span class="bar"><i style="--w:0.2193;--i:1"></i></span><span class="pct">21.9%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">BNB Chain</span><span class="how">totalSupply() · block 131,690,022</span><span class="addr" title="0x2d5bdc96d9c8aabbdb38c9a27398513e7e5ef84f">0x2d5bdc…5ef84f</span></th><td class="num">272,360,610.08</td><td class="share"><span class="bar"><i style="--w:0.1434;--i:2"></i></span><span class="pct">14.3%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Ethereum <span class="cls">BUIDL-I</span></span><span class="how">totalSupply() · block 26,343,797</span><span class="addr" title="0x6a9DA2D710BB9B700acde7Cb81F10F1fF8C89041">0x6a9DA2…C89041</span></th><td class="num">229,071,092.71</td><td class="share"><span class="bar"><i style="--w:0.1206;--i:3"></i></span><span class="pct">12.1%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Ethereum</span><span class="how">totalSupply() · block 26,343,797</span><span class="addr" title="0x7712c34205737192402172409a8f7ccef8aa2aec">0x7712c3…aa2aec</span></th><td class="num">172,602,137.65</td><td class="share"><span class="bar"><i style="--w:0.0909;--i:4"></i></span><span class="pct">9.1%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Aptos</span><span class="how">fungible asset supply · ledger version 7,904,196,040</span><span class="addr" title="0x50038be55be5b964cfa32cf128b5cf05f123959f286b4cc02b86cafd48945f89">0x50038b…945f89</span></th><td class="num">157,321,321.25</td><td class="share"><span class="bar"><i style="--w:0.0828;--i:5"></i></span><span class="pct">8.3%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Optimism</span><span class="how">totalSupply() · block 159,112,377</span><span class="addr" title="0xa1cdab15bba75a80df4089cafba013e376957cf5">0xa1cdab…957cf5</span></th><td class="num">26,559,989.52</td><td class="share"><span class="bar"><i style="--w:0.0140;--i:6"></i></span><span class="pct">1.4%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Tempo</span><span class="how">totalSupply() · block 47,445,663</span><span class="addr" title="0xb5ff12bd8010baef823d1bfa2ce6bdc0109cbb24">0xb5ff12…9cbb24</span></th><td class="num">17,163,715.87</td><td class="share"><span class="bar"><i style="--w:0.0090;--i:7"></i></span><span class="pct">0.9%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class="flag"><th scope="row"><span class="chain">Arbitrum</span><span class="how">totalSupply() · block 521,277,669</span><span class="addr" title="0xa6525ae43edcd03dc08e775774dcabd3bb925872">0xa6525a…925872</span></th><td class="num">12,623,096.51</td><td class="share"><span class="bar"><i style="--w:0.0066;--i:8"></i></span><span class="pct">0.7%</span></td><td class="conf warn"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 4.5v4.25M8 11.25v.25" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>single provider</td></tr><tr class=""><th scope="row"><span class="chain">Polygon</span><span class="how">totalSupply() · block 96,746,124</span><span class="addr" title="0x2893ef551b6dd69f661ac00f11d93e5dc5dc0e99">0x2893ef…dc0e99</span></th><td class="num">10,472,113.83</td><td class="share"><span class="bar"><i style="--w:0.0055;--i:9"></i></span><span class="pct">0.6%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr></tbody>
+  </table></div>
+</section>
+<section class="fund" id="benji" aria-labelledby="benji-h">
+  <header class="fund-head">
+    <div class="who">
+      <h2 id="benji-h">Franklin BENJI</h2>
+      <p class="full">Franklin OnChain U.S. Government Money Fund. Issued by Franklin Templeton.</p>
+      <p class="pill warn"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 4.5v4.25M8 11.25v.25" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>1 of 8 contracts not confirmed by two providers</p>
+    </div>
+    <div class="total">
+      <p class="big num">1,103,438,040.48</p>
+      <p class="unit">tokens across 8 chains</p>
+      
+    </div>
+  </header>
+  <div class="history"><p class="note">One point per night from 2026-11-04. The trend line appears after the second read.</p></div>
+  <div class="scroll"><table class="ledger">
+    <thead><tr><th scope="col">Chain</th><th scope="col" class="num">Supply</th><th scope="col">Share of fund</th><th scope="col">Confirmed</th></tr></thead>
+    <tbody><tr class=""><th scope="row"><span class="chain">Stellar</span><span class="how">asset supply · ledger 65,307,721</span><span class="addr" title="BENJI-GBHNGLLIE3KWGKCHIKMHJ5HVZHYIK7WTBE4QF5PLAKL4CJGSEU7HZIW5">BENJI-GB…7HZIW5</span></th><td class="num">859,823,818.88</td><td class="share"><span class="bar"><i style="--w:0.7792;--i:0"></i></span><span class="pct">77.9%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Base</span><span class="how">totalSupply() · block 53,517,095</span><span class="addr" title="0x60cfc2b186a4cf647486e42c42b11cc6d571d1e4">0x60cfc2…71d1e4</span></th><td class="num">59,971,874.45</td><td class="share"><span class="bar"><i style="--w:0.0544;--i:1"></i></span><span class="pct">5.4%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class="flag"><th scope="row"><span class="chain">Arbitrum</span><span class="how">totalSupply() · block 521,277,669</span><span class="addr" title="0xb9e4765bce2609bc1949592059b17ea72fee6c6a">0xb9e476…ee6c6a</span></th><td class="num">53,159,139.29</td><td class="share"><span class="bar"><i style="--w:0.0482;--i:2"></i></span><span class="pct">4.8%</span></td><td class="conf warn"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 4.5v4.25M8 11.25v.25" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/><circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>single provider</td></tr><tr class=""><th scope="row"><span class="chain">Ethereum</span><span class="how">totalSupply() · block 26,343,797</span><span class="addr" title="0x3ddc84940ab509c11b20b76b466933f40b750dc9">0x3ddc84…750dc9</span></th><td class="num">48,408,041.32</td><td class="share"><span class="bar"><i style="--w:0.0439;--i:3"></i></span><span class="pct">4.4%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Avalanche</span><span class="how">totalSupply() · block 99,434,887</span><span class="addr" title="0xe08b4c1005603427420e64252a8b120cace4d122">0xe08b4c…e4d122</span></th><td class="num">34,450,785.21</td><td class="share"><span class="bar"><i style="--w:0.0312;--i:4"></i></span><span class="pct">3.1%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Polygon</span><span class="how">totalSupply() · block 96,746,132</span><span class="addr" title="0x408a634b8a8f0de729b48574a3a7ec3fe820b00a">0x408a63…20b00a</span></th><td class="num">32,339,222.38</td><td class="share"><span class="bar"><i style="--w:0.0293;--i:5"></i></span><span class="pct">2.9%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Aptos</span><span class="how">fungible asset supply · ledger version 7,904,199,926</span><span class="addr" title="0x100589a94461253007bb31ab4511953f37aa8967e2b22077f740e492f3a1900f">0x100589…a1900f</span></th><td class="num">14,774,134.89</td><td class="share"><span class="bar"><i style="--w:0.0134;--i:6"></i></span><span class="pct">1.3%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr><tr class=""><th scope="row"><span class="chain">Solana</span><span class="how">mint supply · slot 465,438,507</span><span class="addr" title="5Tu84fKBpe9vfXeotjvfvWdWbAjy3hqsExvuHgFqFxA1">5Tu84fKB…FqFxA1</span></th><td class="num">511,024.06</td><td class="share"><span class="bar"><i style="--w:0.0005;--i:7"></i></span><span class="pct">0.0%</span></td><td class="conf ok"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>2 of 2</td></tr></tbody>
+  </table></div>
+</section>
+  <section class="method" aria-labelledby="method-h">
+    <h2 id="method-h">How it is read</h2>
+    <dl>
+      <dt>EVM chains</dt><dd>totalSupply() at the finalized block.</dd>
+      <dt>Solana</dt><dd>Mint supply at finalized commitment.</dd>
+      <dt>Aptos</dt><dd>Fungible asset supply, pinned to one ledger version.</dd>
+      <dt>Stellar</dt><dd>Every trustline, claimable balance, pool and contract amount of the asset, from Horizon.</dd>
+    </dl>
+    <p>A contract counts as confirmed only when two independent providers return the same figure to the cent. Anything else is shown as it is, never smoothed over. Contract addresses come from public token lists and are checked against the name each contract reports on-chain.</p>
+    <p>ties has no token and sells nothing. It is read-only public data, not investment advice.</p>
+  </section>
+  <footer><span>By Stephane T., Luxembourg.</span><a href="data/latest.json">Raw data (JSON)</a></footer>
+</main>
+<script>
+(() => {
+  const el = document.querySelector("[data-read]");
+  if (!el) return;
+  const hours = Math.round((Date.now() - Date.parse(el.dataset.read)) / 36e5);
+  if (Number.isFinite(hours) && hours >= 0) el.textContent += hours < 1 ? " (under an hour ago)" : ` (${hours} h ago)`;
+})();
+</script></body>
+</html>
