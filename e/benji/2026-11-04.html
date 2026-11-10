@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Franklin BENJI, 2026-11-04</title>
+<meta name="description" content="On-chain supply of tokenized money market funds, chain by chain, read every night from two independent providers.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="alternate" type="application/rss+xml" title="ties: moves and events" href="../../feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Lab-notebook ledger: one column, summary first, then one ledger per fund, method last. Plex Sans + Plex Mono as one instrument family; ink of the post images, one teal for verification. */
+:root {
+  --bg: oklch(0.99 0 0); --fg: oklch(0.18 0 0); --fg-2: oklch(0.43 0.004 200); --rule: oklch(0.905 0.003 200);
+  --wash: oklch(0.962 0.004 200); --ok: oklch(0.47 0.09 185); --warn: oklch(0.55 0.19 32);
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: oklch(0.165 0.003 200); --fg: oklch(0.955 0 0); --fg-2: oklch(0.74 0.006 200); --rule: oklch(0.29 0.004 200);
+  --wash: oklch(0.215 0.004 200); --ok: oklch(0.78 0.1 180); --warn: oklch(0.72 0.16 35); color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: oklch(0.165 0.003 200); --fg: oklch(0.955 0 0); --fg-2: oklch(0.74 0.006 200); --rule: oklch(0.29 0.004 200);
+  --wash: oklch(0.215 0.004 200); --ok: oklch(0.78 0.1 180); --warn: oklch(0.72 0.16 35); color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 400 1rem/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+.page { max-width: 64rem; margin: 0 auto; padding-block: 1.5rem 3rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 4rem; }
+a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 0.2em; transition: text-decoration-color 150ms ease; }
+@media (hover: hover) and (pointer: fine) { a:hover { text-decoration-color: currentColor; } }
+:focus-visible { outline: 2px solid var(--ok); outline-offset: 3px; border-radius: 2px; }
+
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 1.5rem;
+  border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+.mark { font-weight: 700; font-size: 1.375rem; letter-spacing: -0.03em; margin: 0; }
+.mark span { font-weight: 400; font-size: 0.9375rem; letter-spacing: 0; color: var(--fg-2); margin-left: 0.625rem; }
+.stamp { margin: 0; color: var(--fg-2); font-size: 0.875rem; }
+
+.intro { display: grid; gap: 1rem; }
+h1 { font-size: 2.75rem; line-height: 1.06; font-weight: 700; letter-spacing: -0.035em; margin: 0; max-width: 18ch; text-wrap: balance; }
+.lede { color: var(--fg-2); max-width: 62ch; margin: 0; font-size: 1.0625rem; text-wrap: pretty; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+th, td { padding: 0.875rem 1rem 0.875rem 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: middle; }
+th:last-child, td:last-child { padding-right: 0; }
+thead th { font-size: 0.8125rem; color: var(--fg-2); font-weight: 500; padding-block: 0.5rem; }
+tbody tr { transition: background-color 150ms ease; }
+@media (hover: hover) and (pointer: fine) { tbody tr:hover { background: var(--wash); } }
+.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+td.num { font-weight: 600; }
+.summary th[scope="row"] { font-weight: 600; }
+
+.fund { display: grid; gap: 1.25rem; min-width: 0; scroll-margin-top: 1.5rem; }
+.fund-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1rem 2rem;
+  border-bottom: 2px solid var(--fg); padding-bottom: 1.25rem; }
+.who { display: grid; gap: 0.375rem; justify-items: start; min-width: 0; }
+h2 { font-size: 1.625rem; line-height: 1.15; margin: 0; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+.full { margin: 0; color: var(--fg-2); font-size: 0.9375rem; }
+.pill { display: inline-flex; align-items: center; gap: 0.375rem; margin: 0.375rem 0 0; padding: 0.25rem 0.75rem 0.25rem 0.5rem;
+  border-radius: 999px; font-size: 0.8125rem; font-weight: 500; background: var(--wash); }
+.pill.ok, .conf.ok { color: var(--ok); }
+.pill.warn, .conf.warn, tr.flag td.num { color: var(--warn); }
+.ico { width: 1rem; height: 1rem; flex: none; }
+.total { text-align: right; display: grid; gap: 0.125rem; }
+.big { font-size: 2.125rem; font-weight: 700; letter-spacing: -0.02em; margin: 0; line-height: 1.1; }
+.unit, .delta, .note { margin: 0; color: var(--fg-2); font-size: 0.875rem; }
+.spark { width: 100%; max-width: 20rem; height: 3.5rem; display: block; }
+
+.scroll { overflow-x: auto; min-width: 0; }
+.ledger { min-width: 44rem; }
+.ledger tbody th { font-weight: 400; }
+.chain { display: block; font-weight: 600; }
+.cls { font-weight: 500; font-size: 0.75rem; color: var(--fg-2); background: var(--wash); border-radius: 4px; padding: 0.0625rem 0.375rem; margin-left: 0.25rem; }
+.how, .addr { display: block; font-family: var(--mono); font-size: 0.75rem; color: var(--fg-2); line-height: 1.5; }
+.share { width: 30%; }
+.share { white-space: nowrap; }
+.bar { display: inline-block; vertical-align: middle; width: calc(100% - 3.5rem); height: 0.375rem; background: var(--wash); border-radius: 999px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: calc(var(--w) * 100%); min-width: 2px; background: var(--fg); border-radius: inherit; }
+.pct { display: inline-block; width: 3.5rem; text-align: right; font-variant-numeric: tabular-nums; color: var(--fg-2); font-size: 0.8125rem; }
+.conf { white-space: nowrap; font-size: 0.875rem; font-weight: 500; }
+.conf .ico { vertical-align: -0.2em; margin-right: 0.25rem; }
+@keyframes grow { from { transform: scaleX(0); } }
+
+.findings { display: grid; gap: 0; }
+.findings > h2, .changes > h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.finding { display: grid; gap: 1.5rem 3rem; padding-block: 2rem; border-top: 1px solid var(--rule); align-items: center; }
+.finding.has-fig { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+.f-text { display: grid; gap: 0.625rem; min-width: 0; }
+.finding h3 { font-size: 1.75rem; line-height: 1.15; letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
+.finding p { margin: 0; color: var(--fg-2); text-wrap: pretty; max-width: 60ch; }
+.finding .when { font-size: 0.8125rem; color: var(--ok); font-weight: 500; }
+.finding .links { font-size: 0.875rem; }
+.finding figure { margin: 0; min-width: 0; }
+.flow { width: 100%; height: auto; display: block; overflow: visible; }
+.f-l { fill: var(--fg); font: 500 17px var(--sans); }
+.f-v { fill: var(--fg-2); font: 400 15px var(--mono); }
+.f-p { fill: none; stroke: var(--fg); stroke-opacity: 0.4; stroke-width: 1.5; stroke-dasharray: 260; animation: draw 900ms var(--ease-out) both; animation-delay: calc(var(--i) * 60ms); }
+.f-box { fill: var(--fg); }
+.f-bt { fill: var(--bg); font: 500 16px var(--sans); }
+.f-bv { fill: var(--bg); font: 700 23px var(--sans); }
+@keyframes draw { from { stroke-dashoffset: 260; } to { stroke-dashoffset: 0; } }
+.cmp { display: grid; gap: 0.875rem; }
+.cmp-k { margin: 0; font-size: 0.8125rem; color: var(--fg-2); }
+.cmp-row { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 0.25rem 1rem; align-items: center; }
+.cmp-l { font-size: 0.875rem; font-weight: 500; }
+.cmp-bar { height: 0.875rem; background: var(--wash); border-radius: 999px; overflow: hidden; grid-row: span 2; }
+.cmp-bar i { display: block; height: 100%; width: calc(var(--w) * 100%); background: var(--fg); border-radius: inherit;
+  transform-origin: left center; animation: grow 800ms var(--ease-out) both; animation-delay: calc(var(--i) * 120ms); }
+.cmp-row:last-child .cmp-bar i { background: var(--ok); }
+.cmp-v { font-size: 0.8125rem; color: var(--fg-2); }
+.changes { display: grid; gap: 0.75rem; }
+.mv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem 3rem; }
+.mv-fund { display: grid; gap: 0.5rem; align-content: start; }
+.mv-name { margin: 0; font-weight: 600; }
+.mv-fund > p.quiet { margin: 0; }
+.mv-list { list-style: none; margin: 0; padding: 0; }
+.mv-list li { display: grid; grid-template-columns: 1fr auto 6.5rem; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--rule); font-size: 0.9375rem; }
+.mv-d { font-weight: 600; }
+.mv-list .quiet { text-align: right; }
+.where { display: grid; gap: 0.625rem; }
+.where-k { margin: 0; font-size: 0.8125rem; color: var(--fg-2); font-weight: 500; }
+.where-bar { display: flex; gap: 2px; height: 2.5rem; border-radius: 8px; overflow: hidden; }
+.where-bar i { flex: var(--w) 1 0; min-width: 3px; background: color-mix(in oklch, var(--fg) var(--k), var(--bg));
+  transform-origin: left center; animation: grow 800ms var(--ease-out) both; }
+.where-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.375rem 1.25rem; font-size: 0.875rem; }
+.where-legend li { display: inline-flex; align-items: center; gap: 0.375rem; }
+.where-legend b { width: 0.625rem; height: 0.625rem; border-radius: 2px; background: color-mix(in oklch, var(--fg) var(--k), var(--bg)); }
+.where-legend .num { color: var(--fg-2); }
+.chg { font-weight: 400; color: var(--fg-2); }
+.recon { display: grid; gap: 0.75rem; margin-top: 1rem; }
+.recon h3 { font-size: 1.0625rem; margin: 0; }
+.recon .note { max-width: 70ch; }
+.mv { font-size: 0.6875rem; vertical-align: 0.1em; }
+.quiet { color: var(--fg-2); }
+.method { display: grid; gap: 1.25rem; border-top: 1px solid var(--rule); padding-top: 2rem; }
+.method h2 { font-size: 1.25rem; }
+.method dl { display: grid; grid-template-columns: 7rem 1fr; gap: 0.75rem 1.5rem; margin: 0; max-width: 46rem; }
+.method dt { font-weight: 600; }
+.method dd { margin: 0; color: var(--fg-2); }
+.method p { margin: 0; color: var(--fg-2); max-width: 62ch; text-wrap: pretty; }
+
+footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--rule); padding-top: 1rem;
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between; }
+
+@media (max-width: 40rem) {
+  .finding.has-fig { grid-template-columns: 1fr; }
+  .finding h3 { font-size: 1.4rem; }
+  .ledger { min-width: 0; }
+  .chains .addr, .chains th:nth-child(4), .chains td:nth-child(4), .recon-t th:nth-child(5), .recon-t td:nth-child(5), .conf .ctext { display: none; }
+  .cmp-row { grid-template-columns: 1fr; }
+  .mv-list li { grid-template-columns: 1fr auto; }
+  .mv-list .quiet { display: none; }
+  .page { gap: 3rem; }
+  h1 { font-size: 2.125rem; }
+  .total { text-align: left; }
+  .big { font-size: 1.75rem; }
+  .method dl { grid-template-columns: 1fr; gap: 0.25rem; }
+  .method dd { margin-bottom: 0.75rem; }
+}
+@media (prefers-reduced-motion: reduce) { .where-bar i, .cmp-bar i, .f-p { animation: none; } tbody tr, a { transition: none; } }
+</style>
+<script data-goatcounter="https://wooweather.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body><style>
+tr:target { background: var(--wash); box-shadow: inset 3px 0 0 var(--ok); }
+.evt { min-width: 48rem; }
+.evt .k-unknown { color: var(--warn); }
+.evt a.at { font-variant-numeric: tabular-nums; }
+.evt .mono { font-family: var(--mono); font-size: 0.8125rem; color: var(--fg-2); }
+.days { display: flex; gap: 1rem; margin: 0; font-size: 0.875rem; color: var(--fg-2); }
+@media (max-width: 40rem) { .evt { min-width: 0; } .evt th:nth-child(5), .evt td:nth-child(5) { display: none; } }
+</style>
+<main class="page">
+  <header class="top">
+    <p class="mark"><a href="../../">ties</a><span>tokenized fund supply, read on-chain</span></p>
+    <p class="days"><a href="2026-11-03.html">← 2026-11-03</a> <a href="2026-11-05.html">2026-11-05 →</a></p>
+  </header>
+  <section class="intro" aria-labelledby="q">
+    <h1 id="q">Franklin BENJI on 2026-11-04</h1>
+    <p class="lede">Every mint and burn of the fund's tokens that UTC day, on Stellar, Base, Arbitrum, Ethereum, Avalanche, Polygon, Aptos, Solana, classified by ties. The time of each event is its permanent link; the transaction opens in the chain's explorer.</p>
+    <div class="scroll"><table class="summary">
+      <thead><tr><th scope="col">Kind</th><th scope="col" class="num">Events</th><th scope="col" class="num">Tokens</th></tr></thead>
+      <tbody><tr><th scope="row">Subscription</th><td class="num">8</td><td class="num">120,500,174.04</td></tr><tr><th scope="row">Redemption</th><td class="num">4</td><td class="num">2,655.25</td></tr><tr><th scope="row">Dividend</th><td class="num">1,037</td><td class="num">114,498.18</td></tr><tr><th scope="row">Chain move</th><td class="num">20</td><td class="num">323,347,241.88</td></tr></tbody>
+    </table></div>
+  </section>
+  <section aria-label="Events">
+    <div class="scroll"><table class="ledger evt">
+      <thead><tr><th scope="col">UTC</th><th scope="col">Chain</th><th scope="col">Kind</th><th scope="col" class="num">Tokens</th><th scope="col">Holder</th><th scope="col">Transaction</th></tr></thead>
+      <tbody><tr id="stellar-280464701618585602"><td><a class="at" href="#stellar-280464701618585602" title="Permanent link to this event">10:58:44</a></td><td>Stellar</td><td class="k-redemption">Redemption</td><td class="num">−300.00</td><td class="mono" title="GBJZTASWYUAAATIF4D2RGJXFTMDS7RPKPEA3FIGU4UBH2SN6X34I7ZUZ">GBJZTASW…4I7ZUZ</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/e729c56bd4910b8b02e9c4aac8ff16004f9a8a94d005db62aa2f7716a5af2125" rel="noopener">e729c56b…af2125</a></td></tr><tr id="stellar-280467815470387202"><td><a class="at" href="#stellar-280467815470387202" title="Permanent link to this event">11:59:09</a></td><td>Stellar</td><td class="k-redemption">Redemption</td><td class="num">−51.25</td><td class="mono" title="GCVF5SP6UGF22EGGY252M6POIROZEUWIOQ4WXAIIPBBF24LONF5F5Z72">GCVF5SP6…5F5Z72</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/216722d35b24f250b2f4b035dfd4875586b8b7654d85501896fc5024295a58f9" rel="noopener">216722d3…5a58f9</a></td></tr><tr id="stellar-280469073895100418"><td><a class="at" href="#stellar-280469073895100418" title="Permanent link to this event">12:23:34</a></td><td>Stellar</td><td class="k-redemption">Redemption</td><td class="num">−1,004.00</td><td class="mono" title="GASMBVZDURME2CWITU6VPFBL2JCK23ZUBM7CUZWT4GUI6V3IS7UE3R35">GASMBVZD…UE3R35</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/bd0086c5a8761c953ed2f9c1ef1b81e4e23b4f65a94feb3af1b503f973b53e72" rel="noopener">bd0086c5…b53e72</a></td></tr><tr id="stellar-280469078190702594"><td><a class="at" href="#stellar-280469078190702594" title="Permanent link to this event">12:23:39</a></td><td>Stellar</td><td class="k-redemption">Redemption</td><td class="num">−1,300.00</td><td class="mono" title="GASMBVZDURME2CWITU6VPFBL2JCK23ZUBM7CUZWT4GUI6V3IS7UE3R35">GASMBVZD…UE3R35</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/d8ad881593dc8af95a1be5cf912c154027b2761068c7124c59f1e63e9f78be38" rel="noopener">d8ad8815…78be38</a></td></tr><tr id="stellar-280471620811010050"><td><a class="at" href="#stellar-280471620811010050" title="Permanent link to this event">13:12:59</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+25.00</td><td class="mono" title="GBADTHJW6EBYNKSIVMTZYDJXI6XVSWPT3OGCO6YD7VPVPS5CR7BIRH4C">GBADTHJW…BIRH4C</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/f39ce8c2011cbea9d4e054ee2a98a77062e7b03b585818722cbd032f34ef012f" rel="noopener">f39ce8c2…ef012f</a></td></tr><tr id="stellar-280480519983857666"><td><a class="at" href="#stellar-280480519983857666" title="Permanent link to this event">16:05:39</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+25.00</td><td class="mono" title="GDW73Z6QQXL7J4XHTQQ5F56D2CLZT3MLTIIQZ7S62GUJCFRFAVM3PHJM">GDW73Z6Q…M3PHJM</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/ac382ca6ef976895927c7cd24ca2ecda0665b15b2572d9f2a2194484a03ff4a1" rel="noopener">ac382ca6…3ff4a1</a></td></tr><tr id="stellar-280494212338978818"><td><a class="at" href="#stellar-280494212338978818" title="Permanent link to this event">20:31:19</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+75,000,000.00</td><td class="mono" title="GAHPQ5V26V5FAFMX3HLCBXTJOSO6FAKZQ4YIRTESWIWZNLAMOR563KZ3">GAHPQ5V2…563KZ3</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/82612dd42c362d2e884a1beee235e10032a52bb114ddbeabe89dbc79ca8d8f39" rel="noopener">82612dd4…8d8f39</a></td></tr><tr id="stellar-280494233814040578"><td><a class="at" href="#stellar-280494233814040578" title="Permanent link to this event">20:31:44</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+600,000.00</td><td class="mono" title="GAGZEBFDTI73XNIVGYJDLPVZIZ26DJVW54BHGHO4PGPUCXPQ2R4CWL5X">GAGZEBFD…4CWL5X</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/941892c0272b0e523bd0ddc046bc24b21b6090327d76cf145ce21c82f850f2cd" rel="noopener">941892c0…50f2cd</a></td></tr><tr id="stellar-280494246700105730"><td><a class="at" href="#stellar-280494246700105730" title="Permanent link to this event">20:31:59</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+11,000,000.00</td><td class="mono" title="GCSVK4ATKDIHZKH3QPKSGRUEDGQJWEM3QY72V3TA5DFDNPMS7NYYJ6TK">GCSVK4AT…YYJ6TK</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/a5415abb990e2d3b17f3533aa838a16550a8469bd8e25121e81c5996a274fae1" rel="noopener">a5415abb…74fae1</a></td></tr><tr id="stellar-280494263878881282"><td><a class="at" href="#stellar-280494263878881282" title="Permanent link to this event">20:32:19</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+12,000,000.00</td><td class="mono" title="GAQQAZ5MLSWVG6T4XB4SWYCF5QWBIWSWE66LNJY5LA3UV2GARNOPV4I4">GAQQAZ5M…OPV4I4</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/dc53b8ec3caadc55ca2d1f77c2b004352821f5e8cec28968445042d1bf1dbdb0" rel="noopener">dc53b8ec…1dbdb0</a></td></tr><tr id="stellar-280494263878946818"><td><a class="at" href="#stellar-280494263878946818" title="Permanent link to this event">20:32:19</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+21,900,000.00</td><td class="mono" title="GCNPOIAH6MHDRMAD4ABWWXUYF4RN4JZV76V7ABNHN4MIRPNRUMDW4JR2">GCNPOIAH…DW4JR2</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/95f272d6d0babadafa489aad2dc828a970222704ce8a4f1215a587bd3e685745" rel="noopener">95f272d6…685745</a></td></tr><tr id="stellar-280496853743964162"><td><a class="at" href="#stellar-280496853743964162" title="Permanent link to this event">21:22:34</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+124.04</td><td class="mono" title="GCA3GKNURAZMCUWHG5A77G65P47ZJI6VSMFAYV3X7AY6MHR534KVFKC7">GCA3GKNU…KVFKC7</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/9c4a5739a760d76746ca03cfe05542f8591073f8511864066ca8901553853d38" rel="noopener">9c4a5739…853d38</a></td></tr><tr id="base-0x48ada03f62190b2a7ec62126f8451734c6893d8222a23f67dd45b83470c1c9ba"><td><a class="at" href="#base-0x48ada03f62190b2a7ec62126f8451734c6893d8222a23f67dd45b83470c1c9ba" title="Permanent link to this event">21:47:29</a></td><td>Base</td><td class="k-migration">Chain move</td><td class="num">−16,168,576.61</td><td class="mono" title="0xf77192e186e390ffd36745dc75f10d38986875e3">0xf77192…6875e3</td><td class="mono"><a href="https://basescan.org/tx/0x48ada03f62190b2a7ec62126f8451734c6893d8222a23f67dd45b83470c1c9ba" rel="noopener">0x48ada0…c1c9ba</a></td></tr><tr id="stellar-280498146528792577"><td><a class="at" href="#stellar-280498146528792577" title="Permanent link to this event">21:47:39</a></td><td>Stellar</td><td class="k-migration">Chain move</td><td class="num">+16,168,576.61</td><td class="mono" title="GAHPQ5V26V5FAFMX3HLCBXTJOSO6FAKZQ4YIRTESWIWZNLAMOR563KZ3">GAHPQ5V2…563KZ3</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/aa0de730681c52da8dc851a22f362a3412ff6484c69e9fc04887646930966994" rel="noopener">aa0de730…966994</a></td></tr><tr id="polygon-0x83dc108eb27135511370fe1a6c95179216002b0111813ad121e428910b7e94ae"><td><a class="at" href="#polygon-0x83dc108eb27135511370fe1a6c95179216002b0111813ad121e428910b7e94ae" title="Permanent link to this event">21:49:55</a></td><td>Polygon</td><td class="k-migration">Chain move</td><td class="num">−16,168,576.61</td><td class="mono" title="0x2c07af6c235841dd0a29d8edd7589a61ab6bebc1">0x2c07af…6bebc1</td><td class="mono"><a href="https://polygonscan.com/tx/0x83dc108eb27135511370fe1a6c95179216002b0111813ad121e428910b7e94ae" rel="noopener">0x83dc10…7e94ae</a></td></tr><tr id="stellar-280498275377889281"><td><a class="at" href="#stellar-280498275377889281" title="Permanent link to this event">21:50:09</a></td><td>Stellar</td><td class="k-migration">Chain move</td><td class="num">+16,168,576.61</td><td class="mono" title="GAHPQ5V26V5FAFMX3HLCBXTJOSO6FAKZQ4YIRTESWIWZNLAMOR563KZ3">GAHPQ5V2…563KZ3</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/54e2d0cafd5c745837dbe7088713d0172fd38dd4381c408506417e8450d1882c" rel="noopener">54e2d0ca…d1882c</a></td></tr><tr id="avalanche-0x6ff3dc81bc5ca218fe38e33cbc8fb6da0430114b1fa21e5bbedfed5aa27da56d"><td><a class="at" href="#avalanche-0x6ff3dc81bc5ca218fe38e33cbc8fb6da0430114b1fa21e5bbedfed5aa27da56d" title="Permanent link to this event">21:51:19</a></td><td>Avalanche</td><td class="k-migration">Chain move</td><td class="num">−16,168,576.61</td><td class="mono" title="0x5a7f927a8db294846aac07e6a8213fcd608e9932">0x5a7f92…8e9932</td><td class="mono"><a href="https://snowtrace.io/tx/0x6ff3dc81bc5ca218fe38e33cbc8fb6da0430114b1fa21e5bbedfed5aa27da56d" rel="noopener">0x6ff3dc…7da56d</a></td></tr><tr id="stellar-280498352687419393"><td><a class="at" href="#stellar-280498352687419393" title="Permanent link to this event">21:51:39</a></td><td>Stellar</td><td class="k-migration">Chain move</td><td class="num">+16,168,576.61</td><td class="mono" title="GAHPQ5V26V5FAFMX3HLCBXTJOSO6FAKZQ4YIRTESWIWZNLAMOR563KZ3">GAHPQ5V2…563KZ3</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/ad70cf5aab9a85aa2e7159e4b93addcd89dc8ea92e82bc5b2b527020df1d24fc" rel="noopener">ad70cf5a…1d24fc</a></td></tr><tr id="polygon-0xfa5f9fb3dd8614e21e5ec508212f7b91c615818fa1b9ab03238b9449767a0965"><td><a class="at" href="#polygon-0xfa5f9fb3dd8614e21e5ec508212f7b91c615818fa1b9ab03238b9449767a0965" title="Permanent link to this event">21:52:30</a></td><td>Polygon</td><td class="k-migration">Chain move</td><td class="num">−16,168,576.61</td><td class="mono" title="0x276ba505ca9585c42c9383e157021b4599e3af62">0x276ba5…e3af62</td><td class="mono"><a href="https://polygonscan.com/tx/0xfa5f9fb3dd8614e21e5ec508212f7b91c615818fa1b9ab03238b9449767a0965" rel="noopener">0xfa5f9f…7a0965</a></td></tr><tr id="stellar-280498408522944513"><td><a class="at" href="#stellar-280498408522944513" title="Permanent link to this event">21:52:44</a></td><td>Stellar</td><td class="k-migration">Chain move</td><td class="num">+16,168,576.61</td><td class="mono" title="GBEQV6SQSQT2SWPVI4TKWV2WF47VWYLMYD53ANKTYODKX6Q6PR5ZPLMU">GBEQV6SQ…5ZPLMU</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/5ef649ceadaddd8d7b5c478de96cd79a6d213e12e7d903b75792a812e365e3af" rel="noopener">5ef649ce…65e3af</a></td></tr><tr id="base-0x5c2d7edde9e9581f05ae288e673c2ea47f06cf740e53975552f1499f1902403f"><td><a class="at" href="#base-0x5c2d7edde9e9581f05ae288e673c2ea47f06cf740e53975552f1499f1902403f" title="Permanent link to this event">21:53:03</a></td><td>Base</td><td class="k-migration">Chain move</td><td class="num">−16,168,576.61</td><td class="mono" title="0x2c78c52f9d3e0a44250c3b5e996134f63bf0a854">0x2c78c5…f0a854</td><td class="mono"><a href="https://basescan.org/tx/0x5c2d7edde9e9581f05ae288e673c2ea47f06cf740e53975552f1499f1902403f" rel="noopener">0x5c2d7e…02403f</a></td></tr><tr id="stellar-280498429996658689"><td><a class="at" href="#stellar-280498429996658689" title="Permanent link to this event">21:53:09</a></td><td>Stellar</td><td class="k-migration">Chain move</td><td class="num">+16,168,576.61</td><td class="mono" title="GBEQV6SQSQT2SWPVI4TKWV2WF47VWYLMYD53ANKTYODKX6Q6PR5ZPLMU">GBEQV6SQ…5ZPLMU</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/777e5f4470aeaac0e6caf73b227359681ab1a4ead890321f88260215df88c9fb" rel="noopener">777e5f44…88c9fb</a></td></tr><tr id="ethereum-0x4a9d80110f3fa5db95c7a0e2148f6d199adf3e806a57cbcd583f4558f8476995"><td><a class="at" href="#ethereum-0x4a9d80110f3fa5db95c7a0e2148f6d199adf3e806a57cbcd583f4558f8476995" title="Permanent link to this event">21:54:23</a></td><td>Ethereum</td><td class="k-migration">Chain move</td><td class="num">−16,168,576.61</td><td class="mono" title="0x6618c4d9ebaec82a46f0c8e2d9ece8a22da0e212">0x6618c4…a0e212</td><td class="mono"><a href="https://etherscan.io/tx/0x4a9d80110f3fa5db95c7a0e2148f6d199adf3e806a57cbcd583f4558f8476995" rel="noopener">0x4a9d80…476995</a></td></tr><tr id="stellar-280498503011012609"><td><a class="at" href="#stellar-280498503011012609" title="Permanent link to this event">21:54:34</a></td><td>Stellar</td><td class="k-migration">Chain move</td><td class="num">+16,168,576.61</td><td class="mono" title="GAHPQ5V26V5FAFMX3HLCBXTJOSO6FAKZQ4YIRTESWIWZNLAMOR563KZ3">GAHPQ5V2…563KZ3</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/56dc621546afc807c72f607ea95644ffa042e8c4a18c3dc60f300ae4c71f6c7a" rel="noopener">56dc6215…1f6c7a</a></td></tr><tr id="arbitrum-0x4674f7d74139b41afde6cdc6a9f80172086baf4cc0fdbecf9de65f8929c64aa3"><td><a class="at" href="#arbitrum-0x4674f7d74139b41afde6cdc6a9f80172086baf4cc0fdbecf9de65f8929c64aa3" title="Permanent link to this event">21:54:48</a></td><td>Arbitrum</td><td class="k-migration">Chain move</td><td class="num">−16,168,576.61</td><td class="mono" title="0xaadc5d348b595776db0ec9aa02c6052ac4e97acc">0xaadc5d…e97acc</td><td class="mono"><a href="https://arbiscan.io/tx/0x4674f7d74139b41afde6cdc6a9f80172086baf4cc0fdbecf9de65f8929c64aa3" rel="noopener">0x4674f7…c64aa3</a></td></tr><tr id="stellar-280498520191483905"><td><a class="at" href="#stellar-280498520191483905" title="Permanent link to this event">21:54:54</a></td><td>Stellar</td><td class="k-migration">Chain move</td><td class="num">+16,168,576.61</td><td class="mono" title="GAHPQ5V26V5FAFMX3HLCBXTJOSO6FAKZQ4YIRTESWIWZNLAMOR563KZ3">GAHPQ5V2…563KZ3</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/c069d288eb9b2be6e80dc89d1ad930c377d451514a987c94cffa68f58f7adc31" rel="noopener">c069d288…7adc31</a></td></tr><tr id="ethereum-0xb7e0b325b6f44cd69c5b135ac5f4b4820458de1a55cd339bed51d1b1d2a3695a"><td><a class="at" href="#ethereum-0xb7e0b325b6f44cd69c5b135ac5f4b4820458de1a55cd339bed51d1b1d2a3695a" title="Permanent link to this event">21:55:35</a></td><td>Ethereum</td><td class="k-migration">Chain move</td><td class="num">−16,167,142.73</td><td class="mono" title="0x4c0dc59c1caa39e8a262c77b3786b76e5d2f0143">0x4c0dc5…2f0143</td><td class="mono"><a href="https://etherscan.io/tx/0xb7e0b325b6f44cd69c5b135ac5f4b4820458de1a55cd339bed51d1b1d2a3695a" rel="noopener">0xb7e0b3…a3695a</a></td></tr><tr id="stellar-280498567436066817"><td><a class="at" href="#stellar-280498567436066817" title="Permanent link to this event">21:55:49</a></td><td>Stellar</td><td class="k-migration">Chain move</td><td class="num">+16,167,142.73</td><td class="mono" title="GBEQV6SQSQT2SWPVI4TKWV2WF47VWYLMYD53ANKTYODKX6Q6PR5ZPLMU">GBEQV6SQ…5ZPLMU</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/84620f536f6fd889682527cbd86e76902d4750b85089dd5c328e957d2f511434" rel="noopener">84620f53…511434</a></td></tr><tr id="avalanche-0x251f7d0ba1806ac6b45d7c4c2f0514693fe3f2d1de048838d629bf1abf3bd0d2"><td><a class="at" href="#avalanche-0x251f7d0ba1806ac6b45d7c4c2f0514693fe3f2d1de048838d629bf1abf3bd0d2" title="Permanent link to this event">21:56:07</a></td><td>Avalanche</td><td class="k-migration">Chain move</td><td class="num">−16,168,576.61</td><td class="mono" title="0xbc5882f49ef3e81173f24136c5d98b83aa47ba92">0xbc5882…47ba92</td><td class="mono"><a href="https://snowtrace.io/tx/0x251f7d0ba1806ac6b45d7c4c2f0514693fe3f2d1de048838d629bf1abf3bd0d2" rel="noopener">0x251f7d…3bd0d2</a></td></tr><tr id="stellar-280498597500985345"><td><a class="at" href="#stellar-280498597500985345" title="Permanent link to this event">21:56:24</a></td><td>Stellar</td><td class="k-migration">Chain move</td><td class="num">+16,168,576.61</td><td class="mono" title="GBEQV6SQSQT2SWPVI4TKWV2WF47VWYLMYD53ANKTYODKX6Q6PR5ZPLMU">GBEQV6SQ…5ZPLMU</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/1feb1b8c08b4b88b01e729411800a09684ff4fdb67f819b001434958281a6a85" rel="noopener">1feb1b8c…1a6a85</a></td></tr><tr id="arbitrum-0x35b704ff05c482a3c4f224dfdf3a1b3253c6297038e3ad218f8514afcd7fabb5"><td><a class="at" href="#arbitrum-0x35b704ff05c482a3c4f224dfdf3a1b3253c6297038e3ad218f8514afcd7fabb5" title="Permanent link to this event">22:00:22</a></td><td>Arbitrum</td><td class="k-migration">Chain move</td><td class="num">−16,157,865.33</td><td class="mono" title="0x368b69c8710532cd0bb12c926e6e445e2ae9c4ee">0x368b69…e9c4ee</td><td class="mono"><a href="https://arbiscan.io/tx/0x35b704ff05c482a3c4f224dfdf3a1b3253c6297038e3ad218f8514afcd7fabb5" rel="noopener">0x35b704…7fabb5</a></td></tr><tr id="stellar-280498807953965057"><td><a class="at" href="#stellar-280498807953965057" title="Permanent link to this event">22:00:29</a></td><td>Stellar</td><td class="k-migration">Chain move</td><td class="num">+16,157,865.33</td><td class="mono" title="GBEQV6SQSQT2SWPVI4TKWV2WF47VWYLMYD53ANKTYODKX6Q6PR5ZPLMU">GBEQV6SQ…5ZPLMU</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/0971db2d7b0707ea8dfd089f505dfe8eff27687df5752552a04585c936df9514" rel="noopener">0971db2d…df9514</a></td></tr><tr><td class="quiet">23:22 to 23:22</td><td>Base</td><td>Dividend</td><td class="num">+6,203.17</td><td class="quiet" colspan="2">4 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:23 to 23:23</td><td>Avalanche</td><td>Dividend</td><td class="num">+3,561.79</td><td class="quiet" colspan="2">4 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:24 to 23:24</td><td>Aptos</td><td>Dividend</td><td class="num">+1,533.75</td><td class="quiet" colspan="2">1 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:25 to 23:25</td><td>Polygon</td><td>Dividend</td><td class="num">+3,336.74</td><td class="quiet" colspan="2">3 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:25 to 23:25</td><td>Arbitrum</td><td>Dividend</td><td class="num">+5,512.55</td><td class="quiet" colspan="2">8 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:27 to 23:28</td><td>Stellar</td><td>Dividend</td><td class="num">+89,336.49</td><td class="quiet" colspan="2">1,014 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:28 to 23:28</td><td>Ethereum</td><td>Dividend</td><td class="num">+5,013.69</td><td class="quiet" colspan="2">3 holders, each listed in the JSON</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="method" aria-labelledby="method-h">
+    <h2 id="method-h">How events are classified</h2>
+    <dl>
+      <dt>Subscription</dt><dd>A mint outside the nightly dividend run.</dd>
+      <dt>Dividend</dt><dd>A mint inside the nightly run (about 1,000 single mints on Stellar), one per holder per night.</dd>
+      <dt>Redemption</dt><dd>A burn, or on Stellar tokens sent back to the issuer.</dd>
+      <dt>Chain move</dt><dd>A burn on one chain and the same amount minted on another within minutes, or the issuer's own cross-chain label. Nets to zero for the fund.</dd>
+      <dt>Unclassified</dt><dd>Touches the supply but fits no rule. Listed, never dropped.</dd>
+    </dl>
+    <p>Rules can improve; an event keeps its link when its label changes. <a href="../../data/benji/events/2026-11-04.json">This day as JSON</a>.</p>
+  </section>
+  <footer><span>By Stephane T., Luxembourg.</span><span><a href="../../">All funds</a></span></footer>
+</main></body>
+</html>

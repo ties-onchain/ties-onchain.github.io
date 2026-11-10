@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Franklin BENJI, 2026-11-05</title>
+<meta name="description" content="On-chain supply of tokenized money market funds, chain by chain, read every night from two independent providers.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="alternate" type="application/rss+xml" title="ties: moves and events" href="../../feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Lab-notebook ledger: one column, summary first, then one ledger per fund, method last. Plex Sans + Plex Mono as one instrument family; ink of the post images, one teal for verification. */
+:root {
+  --bg: oklch(0.99 0 0); --fg: oklch(0.18 0 0); --fg-2: oklch(0.43 0.004 200); --rule: oklch(0.905 0.003 200);
+  --wash: oklch(0.962 0.004 200); --ok: oklch(0.47 0.09 185); --warn: oklch(0.55 0.19 32);
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: oklch(0.165 0.003 200); --fg: oklch(0.955 0 0); --fg-2: oklch(0.74 0.006 200); --rule: oklch(0.29 0.004 200);
+  --wash: oklch(0.215 0.004 200); --ok: oklch(0.78 0.1 180); --warn: oklch(0.72 0.16 35); color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: oklch(0.165 0.003 200); --fg: oklch(0.955 0 0); --fg-2: oklch(0.74 0.006 200); --rule: oklch(0.29 0.004 200);
+  --wash: oklch(0.215 0.004 200); --ok: oklch(0.78 0.1 180); --warn: oklch(0.72 0.16 35); color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 400 1rem/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+.page { max-width: 64rem; margin: 0 auto; padding-block: 1.5rem 3rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 4rem; }
+a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 0.2em; transition: text-decoration-color 150ms ease; }
+@media (hover: hover) and (pointer: fine) { a:hover { text-decoration-color: currentColor; } }
+:focus-visible { outline: 2px solid var(--ok); outline-offset: 3px; border-radius: 2px; }
+
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 1.5rem;
+  border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+.mark { font-weight: 700; font-size: 1.375rem; letter-spacing: -0.03em; margin: 0; }
+.mark span { font-weight: 400; font-size: 0.9375rem; letter-spacing: 0; color: var(--fg-2); margin-left: 0.625rem; }
+.stamp { margin: 0; color: var(--fg-2); font-size: 0.875rem; }
+
+.intro { display: grid; gap: 1rem; }
+h1 { font-size: 2.75rem; line-height: 1.06; font-weight: 700; letter-spacing: -0.035em; margin: 0; max-width: 18ch; text-wrap: balance; }
+.lede { color: var(--fg-2); max-width: 62ch; margin: 0; font-size: 1.0625rem; text-wrap: pretty; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+th, td { padding: 0.875rem 1rem 0.875rem 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: middle; }
+th:last-child, td:last-child { padding-right: 0; }
+thead th { font-size: 0.8125rem; color: var(--fg-2); font-weight: 500; padding-block: 0.5rem; }
+tbody tr { transition: background-color 150ms ease; }
+@media (hover: hover) and (pointer: fine) { tbody tr:hover { background: var(--wash); } }
+.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+td.num { font-weight: 600; }
+.summary th[scope="row"] { font-weight: 600; }
+
+.fund { display: grid; gap: 1.25rem; min-width: 0; scroll-margin-top: 1.5rem; }
+.fund-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1rem 2rem;
+  border-bottom: 2px solid var(--fg); padding-bottom: 1.25rem; }
+.who { display: grid; gap: 0.375rem; justify-items: start; min-width: 0; }
+h2 { font-size: 1.625rem; line-height: 1.15; margin: 0; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+.full { margin: 0; color: var(--fg-2); font-size: 0.9375rem; }
+.pill { display: inline-flex; align-items: center; gap: 0.375rem; margin: 0.375rem 0 0; padding: 0.25rem 0.75rem 0.25rem 0.5rem;
+  border-radius: 999px; font-size: 0.8125rem; font-weight: 500; background: var(--wash); }
+.pill.ok, .conf.ok { color: var(--ok); }
+.pill.warn, .conf.warn, tr.flag td.num { color: var(--warn); }
+.ico { width: 1rem; height: 1rem; flex: none; }
+.total { text-align: right; display: grid; gap: 0.125rem; }
+.big { font-size: 2.125rem; font-weight: 700; letter-spacing: -0.02em; margin: 0; line-height: 1.1; }
+.unit, .delta, .note { margin: 0; color: var(--fg-2); font-size: 0.875rem; }
+.spark { width: 100%; max-width: 20rem; height: 3.5rem; display: block; }
+
+.scroll { overflow-x: auto; min-width: 0; }
+.ledger { min-width: 44rem; }
+.ledger tbody th { font-weight: 400; }
+.chain { display: block; font-weight: 600; }
+.cls { font-weight: 500; font-size: 0.75rem; color: var(--fg-2); background: var(--wash); border-radius: 4px; padding: 0.0625rem 0.375rem; margin-left: 0.25rem; }
+.how, .addr { display: block; font-family: var(--mono); font-size: 0.75rem; color: var(--fg-2); line-height: 1.5; }
+.share { width: 30%; }
+.share { white-space: nowrap; }
+.bar { display: inline-block; vertical-align: middle; width: calc(100% - 3.5rem); height: 0.375rem; background: var(--wash); border-radius: 999px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: calc(var(--w) * 100%); min-width: 2px; background: var(--fg); border-radius: inherit; }
+.pct { display: inline-block; width: 3.5rem; text-align: right; font-variant-numeric: tabular-nums; color: var(--fg-2); font-size: 0.8125rem; }
+.conf { white-space: nowrap; font-size: 0.875rem; font-weight: 500; }
+.conf .ico { vertical-align: -0.2em; margin-right: 0.25rem; }
+@keyframes grow { from { transform: scaleX(0); } }
+
+.findings { display: grid; gap: 0; }
+.findings > h2, .changes > h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+.finding { display: grid; gap: 1.5rem 3rem; padding-block: 2rem; border-top: 1px solid var(--rule); align-items: center; }
+.finding.has-fig { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
+.f-text { display: grid; gap: 0.625rem; min-width: 0; }
+.finding h3 { font-size: 1.75rem; line-height: 1.15; letter-spacing: -0.025em; margin: 0; text-wrap: balance; }
+.finding p { margin: 0; color: var(--fg-2); text-wrap: pretty; max-width: 60ch; }
+.finding .when { font-size: 0.8125rem; color: var(--ok); font-weight: 500; }
+.finding .links { font-size: 0.875rem; }
+.finding figure { margin: 0; min-width: 0; }
+.flow { width: 100%; height: auto; display: block; overflow: visible; }
+.f-l { fill: var(--fg); font: 500 17px var(--sans); }
+.f-v { fill: var(--fg-2); font: 400 15px var(--mono); }
+.f-p { fill: none; stroke: var(--fg); stroke-opacity: 0.4; stroke-width: 1.5; stroke-dasharray: 260; animation: draw 900ms var(--ease-out) both; animation-delay: calc(var(--i) * 60ms); }
+.f-box { fill: var(--fg); }
+.f-bt { fill: var(--bg); font: 500 16px var(--sans); }
+.f-bv { fill: var(--bg); font: 700 23px var(--sans); }
+@keyframes draw { from { stroke-dashoffset: 260; } to { stroke-dashoffset: 0; } }
+.cmp { display: grid; gap: 0.875rem; }
+.cmp-k { margin: 0; font-size: 0.8125rem; color: var(--fg-2); }
+.cmp-row { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 0.25rem 1rem; align-items: center; }
+.cmp-l { font-size: 0.875rem; font-weight: 500; }
+.cmp-bar { height: 0.875rem; background: var(--wash); border-radius: 999px; overflow: hidden; grid-row: span 2; }
+.cmp-bar i { display: block; height: 100%; width: calc(var(--w) * 100%); background: var(--fg); border-radius: inherit;
+  transform-origin: left center; animation: grow 800ms var(--ease-out) both; animation-delay: calc(var(--i) * 120ms); }
+.cmp-row:last-child .cmp-bar i { background: var(--ok); }
+.cmp-v { font-size: 0.8125rem; color: var(--fg-2); }
+.changes { display: grid; gap: 0.75rem; }
+.mv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem 3rem; }
+.mv-fund { display: grid; gap: 0.5rem; align-content: start; }
+.mv-name { margin: 0; font-weight: 600; }
+.mv-fund > p.quiet { margin: 0; }
+.mv-list { list-style: none; margin: 0; padding: 0; }
+.mv-list li { display: grid; grid-template-columns: 1fr auto 6.5rem; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--rule); font-size: 0.9375rem; }
+.mv-d { font-weight: 600; }
+.mv-list .quiet { text-align: right; }
+.where { display: grid; gap: 0.625rem; }
+.where-k { margin: 0; font-size: 0.8125rem; color: var(--fg-2); font-weight: 500; }
+.where-bar { display: flex; gap: 2px; height: 2.5rem; border-radius: 8px; overflow: hidden; }
+.where-bar i { flex: var(--w) 1 0; min-width: 3px; background: color-mix(in oklch, var(--fg) var(--k), var(--bg));
+  transform-origin: left center; animation: grow 800ms var(--ease-out) both; }
+.where-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.375rem 1.25rem; font-size: 0.875rem; }
+.where-legend li { display: inline-flex; align-items: center; gap: 0.375rem; }
+.where-legend b { width: 0.625rem; height: 0.625rem; border-radius: 2px; background: color-mix(in oklch, var(--fg) var(--k), var(--bg)); }
+.where-legend .num { color: var(--fg-2); }
+.chg { font-weight: 400; color: var(--fg-2); }
+.recon { display: grid; gap: 0.75rem; margin-top: 1rem; }
+.recon h3 { font-size: 1.0625rem; margin: 0; }
+.recon .note { max-width: 70ch; }
+.mv { font-size: 0.6875rem; vertical-align: 0.1em; }
+.quiet { color: var(--fg-2); }
+.method { display: grid; gap: 1.25rem; border-top: 1px solid var(--rule); padding-top: 2rem; }
+.method h2 { font-size: 1.25rem; }
+.method dl { display: grid; grid-template-columns: 7rem 1fr; gap: 0.75rem 1.5rem; margin: 0; max-width: 46rem; }
+.method dt { font-weight: 600; }
+.method dd { margin: 0; color: var(--fg-2); }
+.method p { margin: 0; color: var(--fg-2); max-width: 62ch; text-wrap: pretty; }
+
+footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--rule); padding-top: 1rem;
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between; }
+
+@media (max-width: 40rem) {
+  .finding.has-fig { grid-template-columns: 1fr; }
+  .finding h3 { font-size: 1.4rem; }
+  .ledger { min-width: 0; }
+  .chains .addr, .chains th:nth-child(4), .chains td:nth-child(4), .recon-t th:nth-child(5), .recon-t td:nth-child(5), .conf .ctext { display: none; }
+  .cmp-row { grid-template-columns: 1fr; }
+  .mv-list li { grid-template-columns: 1fr auto; }
+  .mv-list .quiet { display: none; }
+  .page { gap: 3rem; }
+  h1 { font-size: 2.125rem; }
+  .total { text-align: left; }
+  .big { font-size: 1.75rem; }
+  .method dl { grid-template-columns: 1fr; gap: 0.25rem; }
+  .method dd { margin-bottom: 0.75rem; }
+}
+@media (prefers-reduced-motion: reduce) { .where-bar i, .cmp-bar i, .f-p { animation: none; } tbody tr, a { transition: none; } }
+</style>
+<script data-goatcounter="https://wooweather.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body><style>
+tr:target { background: var(--wash); box-shadow: inset 3px 0 0 var(--ok); }
+.evt { min-width: 48rem; }
+.evt .k-unknown { color: var(--warn); }
+.evt a.at { font-variant-numeric: tabular-nums; }
+.evt .mono { font-family: var(--mono); font-size: 0.8125rem; color: var(--fg-2); }
+.days { display: flex; gap: 1rem; margin: 0; font-size: 0.875rem; color: var(--fg-2); }
+@media (max-width: 40rem) { .evt { min-width: 0; } .evt th:nth-child(5), .evt td:nth-child(5) { display: none; } }
+</style>
+<main class="page">
+  <header class="top">
+    <p class="mark"><a href="../../">ties</a><span>tokenized fund supply, read on-chain</span></p>
+    <p class="days"><a href="2026-11-04.html">← 2026-11-04</a> <a href="2026-11-06.html">2026-11-06 →</a></p>
+  </header>
+  <section class="intro" aria-labelledby="q">
+    <h1 id="q">Franklin BENJI on 2026-11-05</h1>
+    <p class="lede">Every mint and burn of the fund's tokens that UTC day, on Stellar, Base, Arbitrum, Ethereum, Avalanche, Polygon, Aptos, Solana, classified by ties. The time of each event is its permanent link; the transaction opens in the chain's explorer.</p>
+    <div class="scroll"><table class="summary">
+      <thead><tr><th scope="col">Kind</th><th scope="col" class="num">Events</th><th scope="col" class="num">Tokens</th></tr></thead>
+      <tbody><tr><th scope="row">Subscription</th><td class="num">5</td><td class="num">90,007,178.05</td></tr><tr><th scope="row">Redemption</th><td class="num">6</td><td class="num">36,042,095.86</td></tr><tr><th scope="row">Dividend</th><td class="num">1,038</td><td class="num">120,248.73</td></tr></tbody>
+    </table></div>
+  </section>
+  <section aria-label="Events">
+    <div class="scroll"><table class="ledger evt">
+      <thead><tr><th scope="col">UTC</th><th scope="col">Chain</th><th scope="col">Kind</th><th scope="col" class="num">Tokens</th><th scope="col">Holder</th><th scope="col">Transaction</th></tr></thead>
+      <tbody><tr id="solana-3JPf5pxyUAyBcJCqbXsHqTSww16Z3p5sjFoEG4butsafK2vu7AbjL4CHaftqqhYhoZNbVUVCpzmBNBGJpNZE8uES"><td><a class="at" href="#solana-3JPf5pxyUAyBcJCqbXsHqTSww16Z3p5sjFoEG4butsafK2vu7AbjL4CHaftqqhYhoZNbVUVCpzmBNBGJpNZE8uES" title="Permanent link to this event">02:08:19</a></td><td>Solana</td><td class="k-subscription">Subscription</td><td class="num">+53.05</td><td class="mono" title="8puwvzaJsN3SqBKJK2rYkPayuZzzFYGYN2zKDttzhLHY">8puwvzaJ…tzhLHY</td><td class="mono"><a href="https://solscan.io/tx/3JPf5pxyUAyBcJCqbXsHqTSww16Z3p5sjFoEG4butsafK2vu7AbjL4CHaftqqhYhoZNbVUVCpzmBNBGJpNZE8uES" rel="noopener">3JPf5pxy…ZE8uES</a></td></tr><tr id="stellar-280525840477888514"><td><a class="at" href="#stellar-280525840477888514" title="Permanent link to this event">06:44:59</a></td><td>Stellar</td><td class="k-redemption">Redemption</td><td class="num">−1,000.00</td><td class="mono" title="GDYF3SSHFJHDWKLYCMZZGPYOE75Y2LLIIR4JRGFRZJ524TJ3EP6ETOJP">GDYF3SSH…6ETOJP</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/1df42090ad6771954c0695d44134a78bc6e62b23ea2f130437a520a18051447f" rel="noopener">1df42090…51447f</a></td></tr><tr id="stellar-280543694657306626"><td><a class="at" href="#stellar-280543694657306626" title="Permanent link to this event">12:31:24</a></td><td>Stellar</td><td class="k-redemption">Redemption</td><td class="num">−1,000.00</td><td class="mono" title="GAZL4G2QJSS36NPTSMR32HCKVL37FT53K2KBSFCDJ2VTLRKZ2Z5ZMJNX">GAZL4G2Q…5ZMJNX</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/52f51c84a75629e4ba18cfb6592d76933fb330e2605c31e1fe6214c865591d73" rel="noopener">52f51c84…591d73</a></td></tr><tr id="stellar-280543694657441794"><td><a class="at" href="#stellar-280543694657441794" title="Permanent link to this event">12:31:24</a></td><td>Stellar</td><td class="k-redemption">Redemption</td><td class="num">−40,000.00</td><td class="mono" title="GCLOQN2OJKWB6XX6NIN2GFZKAX5PFVY3QQQCUUE72Q7XRYIA3QP7UKGE">GCLOQN2O…P7UKGE</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/e98c41b8aedbb7d7bd9b0349dd02f2d4cf6f65bb7da66d88e5199092ee8e0d25" rel="noopener">e98c41b8…8e0d25</a></td></tr><tr id="stellar-280552559470067714"><td><a class="at" href="#stellar-280552559470067714" title="Permanent link to this event">15:23:24</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+7,000.00</td><td class="mono" title="GBWDRI3M3B4W72YFN2ERUZLIMVUQNFKJBQBPEDNU4JYQQR27D76ERMKI">GBWDRI3M…6ERMKI</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/a0fb7b7b10ac3bc360fede6fe8617a5642f8c5360f08b70a6f1173f33bf28b41" rel="noopener">a0fb7b7b…f28b41</a></td></tr><tr id="stellar-280554728427982850"><td><a class="at" href="#stellar-280554728427982850" title="Permanent link to this event">16:05:31</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+25.00</td><td class="mono" title="GB7FLHND2K2NXNFRYLLR72J4R7IL4R3Y74OGGUSGSROZ4AVC7P46R237">GB7FLHND…46R237</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/c359441ef35db695302c19e95b469beda38f9bd858d66349b9102f07c46b3ab7" rel="noopener">c359441e…6b3ab7</a></td></tr><tr id="stellar-280563013419962370"><td><a class="at" href="#stellar-280563013419962370" title="Permanent link to this event">18:46:16</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+90,000,000.00</td><td class="mono" title="GAHPQ5V26V5FAFMX3HLCBXTJOSO6FAKZQ4YIRTESWIWZNLAMOR563KZ3">GAHPQ5V2…563KZ3</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/7aea1979bf5dc849901e0e3b145bd56f2fd3eb232bb8be0cfb8f0a93d99c12d6" rel="noopener">7aea1979…9c12d6</a></td></tr><tr id="stellar-280563022010359810"><td><a class="at" href="#stellar-280563022010359810" title="Permanent link to this event">18:46:26</a></td><td>Stellar</td><td class="k-redemption">Redemption</td><td class="num">−36,000,000.00</td><td class="mono" title="GDHK25FXUAEX4RXCHJXK2RDGRKFVWO25FX72MA2XHXX57BUW42ZSJ36I">GDHK25FX…ZSJ36I</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/7b8994a6f2a8512694aa0a682a01e584c452132601d2c8551f2ce2684ad4239f" rel="noopener">7b8994a6…d4239f</a></td></tr><tr id="stellar-280564907501686786"><td><a class="at" href="#stellar-280564907501686786" title="Permanent link to this event">19:23:01</a></td><td>Stellar</td><td class="k-redemption">Redemption</td><td class="num">−5.00</td><td class="mono" title="GCA2QTVZZBW3ZMORUUXO6M6SSTCMBKW2C7S2HR5TOD43E4ZGWD4JQZWF">GCA2QTVZ…4JQZWF</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/3ad6737d033405d90f24d1a5cc18a596c710651c43c093c488c92827653c6886" rel="noopener">3ad6737d…3c6886</a></td></tr><tr id="stellar-280565010580434946"><td><a class="at" href="#stellar-280565010580434946" title="Permanent link to this event">19:25:01</a></td><td>Stellar</td><td class="k-redemption">Redemption</td><td class="num">−90.86</td><td class="mono" title="GCA2QTVZZBW3ZMORUUXO6M6SSTCMBKW2C7S2HR5TOD43E4ZGWD4JQZWF">GCA2QTVZ…4JQZWF</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/0ccef9c2e76fdb61b7f44e4bfc4bac00b4ed38c6bdda04c7f0cf751adda555cd" rel="noopener">0ccef9c2…a555cd</a></td></tr><tr id="stellar-280565053529346050"><td><a class="at" href="#stellar-280565053529346050" title="Permanent link to this event">19:25:51</a></td><td>Stellar</td><td class="k-subscription">Subscription</td><td class="num">+100.00</td><td class="mono" title="GCA2QTVZZBW3ZMORUUXO6M6SSTCMBKW2C7S2HR5TOD43E4ZGWD4JQZWF">GCA2QTVZ…4JQZWF</td><td class="mono"><a href="https://stellar.expert/explorer/public/tx/93c2412341851dc24aaa7a4bea2bea5a9395629da3153c328fb2660308ccffcd" rel="noopener">93c24123…ccffcd</a></td></tr><tr><td class="quiet">23:08 to 23:08</td><td>Solana</td><td>Dividend</td><td class="num">+53.09</td><td class="quiet" colspan="2">1 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:09 to 23:09</td><td>Base</td><td>Dividend</td><td class="num">+2,871.48</td><td class="quiet" colspan="2">4 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:09 to 23:09</td><td>Avalanche</td><td>Dividend</td><td class="num">+219.94</td><td class="quiet" colspan="2">4 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:10 to 23:10</td><td>Aptos</td><td>Dividend</td><td class="num">+1,534.97</td><td class="quiet" colspan="2">1 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:11 to 23:11</td><td>Polygon</td><td>Dividend</td><td class="num">+0.56</td><td class="quiet" colspan="2">3 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:12 to 23:12</td><td>Arbitrum</td><td>Dividend</td><td class="num">+2,165.20</td><td class="quiet" colspan="2">8 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:13 to 23:14</td><td>Stellar</td><td>Dividend</td><td class="num">+111,733.28</td><td class="quiet" colspan="2">1,014 holders, each listed in the JSON</td></tr><tr><td class="quiet">23:15 to 23:15</td><td>Ethereum</td><td>Dividend</td><td class="num">+1,670.19</td><td class="quiet" colspan="2">3 holders, each listed in the JSON</td></tr></tbody>
+    </table></div>
+  </section>
+  <section class="method" aria-labelledby="method-h">
+    <h2 id="method-h">How events are classified</h2>
+    <dl>
+      <dt>Subscription</dt><dd>A mint outside the nightly dividend run.</dd>
+      <dt>Dividend</dt><dd>A mint inside the nightly run (about 1,000 single mints on Stellar), one per holder per night.</dd>
+      <dt>Redemption</dt><dd>A burn, or on Stellar tokens sent back to the issuer.</dd>
+      <dt>Chain move</dt><dd>A burn on one chain and the same amount minted on another within minutes, or the issuer's own cross-chain label. Nets to zero for the fund.</dd>
+      <dt>Unclassified</dt><dd>Touches the supply but fits no rule. Listed, never dropped.</dd>
+    </dl>
+    <p>Rules can improve; an event keeps its link when its label changes. <a href="../../data/benji/events/2026-11-05.json">This day as JSON</a>.</p>
+  </section>
+  <footer><span>By Stephane T., Luxembourg.</span><span><a href="../../">All funds</a></span></footer>
+</main></body>
+</html>
