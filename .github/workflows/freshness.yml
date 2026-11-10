@@ -1,0 +1,31 @@
+# Dead-man's switch: runs on GitHub, not on the VM that publishes, so it still alerts if that machine is down.
+name: freshness
+on:
+  schedule:
+    - cron: "15 23 * * *"  # the nightly read starts 21:30 UTC
+  workflow_dispatch:
+permissions: {}
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Every fund read in the last 26 hours, as served
+        run: |
+          python3 - <<'PY'
+          import json, sys, time, urllib.request
+          from datetime import datetime, timezone
+          with urllib.request.urlopen(f"https://ties-onchain.github.io/data/latest.json?t={int(time.time())}", timeout=30) as r:
+              latest = json.load(r)
+          now = datetime.now(timezone.utc)
+          late = [f"{fund} {d['taken']}" for fund, d in latest.items()
+                  if (now - datetime.strptime(d["taken"], "%Y-%m-%dT%H:%MZ").replace(tzinfo=timezone.utc)).total_seconds() > 26 * 3600]
+          print("late:", late or "none")
+          sys.exit(1 if late else 0)
+          PY
+      - name: Alert
+        if: failure()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: |  # without the secret the failed run still emails the repo's admins
+          [ -n "$NTFY_TOPIC" ] || exit 0
+          curl -s -m 20 -H "Title: ties page is stale" -d "No fresh nightly read on the public page. Check the VM." "https://ntfy.sh/$NTFY_TOPIC" > /dev/null
