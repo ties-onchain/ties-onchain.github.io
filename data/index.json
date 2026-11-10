@@ -5,7 +5,8 @@
   "data/benji/2026-11-06.json",
   "data/benji/2026-11-07.json",
   "data/benji/2026-11-08.json",
-  "data/benji/2026-11-09.json"
+  "data/benji/2026-11-09.json",
+  "data/benji/2026-11-10.json"
  ],
  "BUIDL": [
   "data/buidl/2026-11-04.json",
@@ -13,6 +14,10 @@
   "data/buidl/2026-11-06.json",
   "data/buidl/2026-11-07.json",
   "data/buidl/2026-11-08.json",
-  "data/buidl/2026-11-09.json"
+  "data/buidl/2026-11-09.json",
+  "data/buidl/2026-11-10.json"
+ ],
+ "EUTBL": [
+  "data/eutbl/2026-11-10.json"
  ]
 }
