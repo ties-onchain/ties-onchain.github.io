@@ -1,6 +1,6 @@
 {
  "fund": "BUIDL",
- "taken": "2026-11-10T18:50Z",
+ "taken": "2026-11-10T21:30Z",
  "rows": [
   {
    "chain": "ethereum",
@@ -11,12 +11,12 @@
    "reads": [
     {
      "provider": "ethereum-rpc.publicnode.com",
-     "as_of": "finalized block 26386351",
+     "as_of": "finalized block 26387146",
      "supply": "170226737.157549"
     },
     {
      "provider": "eth.drpc.org",
-     "as_of": "finalized block 26386351",
+     "as_of": "finalized block 26387114",
      "supply": "170226737.157549"
     }
    ]
@@ -30,12 +30,12 @@
    "reads": [
     {
      "provider": "ethereum-rpc.publicnode.com",
-     "as_of": "finalized block 26386351",
+     "as_of": "finalized block 26387146",
      "supply": "144103743.045100"
     },
     {
      "provider": "eth.drpc.org",
-     "as_of": "finalized block 26386351",
+     "as_of": "finalized block 26387114",
      "supply": "144103743.045100"
     }
    ]
@@ -44,18 +44,18 @@
    "chain": "solana",
    "class": "BUIDL",
    "address": "GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr",
-   "supply": "490827334.4",
+   "supply": "483827334.4",
    "status": "ok",
    "reads": [
     {
      "provider": "api.mainnet-beta.solana.com",
-     "as_of": "finalized slot 467827431",
-     "supply": "490827334.4"
+     "as_of": "finalized slot 467872259",
+     "supply": "483827334.4"
     },
     {
      "provider": "solana-mainnet.gateway.tatum.io",
-     "as_of": "finalized slot 467827433",
-     "supply": "490827334.4"
+     "as_of": "finalized slot 467872261",
+     "supply": "483827334.4"
     }
    ]
   },
@@ -68,12 +68,12 @@
    "reads": [
     {
      "provider": "avalanche-c-chain-rpc.publicnode.com",
-     "as_of": "finalized block 99960706",
+     "as_of": "finalized block 99969701",
      "supply": "356359217.490000"
     },
     {
      "provider": "api.avax.network",
-     "as_of": "finalized block 99960707",
+     "as_of": "finalized block 99969702",
      "supply": "356359217.490000"
     }
    ]
@@ -87,12 +87,12 @@
    "reads": [
     {
      "provider": "bsc-rpc.publicnode.com",
-     "as_of": "finalized block 132827271",
+     "as_of": "finalized block 132848561",
      "supply": "277532492.635000"
     },
     {
      "provider": "bsc-dataseed.bnbchain.org",
-     "as_of": "finalized block 132827271",
+     "as_of": "finalized block 132848561",
      "supply": "277532492.635000"
     }
    ]
@@ -106,12 +106,12 @@
    "reads": [
     {
      "provider": "fullnode.mainnet.aptoslabs.com",
-     "as_of": "ledger version 7991739452",
+     "as_of": "ledger version 7993356163",
      "supply": "157418928.490000"
     },
     {
      "provider": "aptos-rest.publicnode.com",
-     "as_of": "ledger version 7991739475",
+     "as_of": "ledger version 7993356191",
      "supply": "157418928.490000"
     }
    ]
@@ -125,12 +125,12 @@
    "reads": [
     {
      "provider": "mainnet.optimism.io",
-     "as_of": "finalized block 159368311",
+     "as_of": "finalized block 159373129",
      "supply": "26575157.770000"
     },
     {
      "provider": "optimism.drpc.org",
-     "as_of": "finalized block 159368311",
+     "as_of": "finalized block 159373129",
      "supply": "26575157.770000"
     }
    ]
@@ -144,12 +144,12 @@
    "reads": [
     {
      "provider": "rpc.tempo.xyz",
-     "as_of": "finalized block 48388773",
+     "as_of": "finalized block 48406541",
      "supply": "17174363.990000"
     },
     {
      "provider": "tempo.drpc.org",
-     "as_of": "finalized block 48388775",
+     "as_of": "finalized block 48406541",
      "supply": "17174363.990000"
     }
    ]
@@ -163,12 +163,12 @@
    "reads": [
     {
      "provider": "arb1.arbitrum.io",
-     "as_of": "finalized block 523059090",
+     "as_of": "finalized block 523092270",
      "supply": "12630305.630000"
     },
     {
      "provider": "arb-pokt.nodies.app",
-     "as_of": "finalized block 523059090",
+     "as_of": "finalized block 523093877",
      "supply": "12630305.630000"
     }
    ]
@@ -182,12 +182,12 @@
    "reads": [
     {
      "provider": "polygon-bor-rpc.publicnode.com",
-     "as_of": "finalized block 97087453",
+     "as_of": "finalized block 97093840",
      "supply": "10478611.200000"
     },
     {
      "provider": "polygon.drpc.org",
-     "as_of": "finalized block 97087453",
+     "as_of": "finalized block 97093840",
      "supply": "10478611.200000"
     }
    ]

@@ -1,16 +1,16 @@
 {
  "BENJI": {
-  "taken": "2026-11-10T18:50Z",
+  "taken": "2026-11-10T21:30Z",
   "rows": [
    {
     "chain": "stellar",
     "class": "BENJI",
     "address": "BENJI-GBHNGLLIE3KWGKCHIKMHJ5HVZHYIK7WTBE4QF5PLAKL4CJGSEU7HZIW5",
-    "supply": "1150569580.6938728",
+    "supply": "1172569580.6938728",
     "status": "ok",
     "as_of": [
-     "ledger 65410119",
-     "ledger 65410119"
+     "ledger 65412035",
+     "ledger 65412035"
     ]
    },
    {
@@ -20,8 +20,8 @@
     "supply": "27655261.256857990886549473",
     "status": "ok",
     "as_of": [
-     "finalized block 55727193",
-     "finalized block 55725155"
+     "finalized block 55774992",
+     "finalized block 55773224"
     ]
    },
    {
@@ -31,8 +31,8 @@
     "supply": "20849018.740256497971895881",
     "status": "ok",
     "as_of": [
-     "finalized block 523059090",
-     "finalized block 523059090"
+     "finalized block 523093877",
+     "finalized block 523093877"
     ]
    },
    {
@@ -42,8 +42,8 @@
     "supply": "16085674.701634014595950007",
     "status": "ok",
     "as_of": [
-     "finalized block 26386351",
-     "finalized block 26386351"
+     "finalized block 26387146",
+     "finalized block 26387146"
     ]
    },
    {
@@ -53,8 +53,8 @@
     "supply": "2118291.927905249458870080",
     "status": "ok",
     "as_of": [
-     "finalized block 99960736",
-     "finalized block 99960736"
+     "finalized block 99969723",
+     "finalized block 99969723"
     ]
    },
    {
@@ -64,8 +64,8 @@
     "supply": "5408.704057792311800157",
     "status": "ok",
     "as_of": [
-     "finalized block 97087463",
-     "finalized block 97087463"
+     "finalized block 97093849",
+     "finalized block 97093849"
     ]
    },
    {
@@ -75,8 +75,8 @@
     "supply": "14783332.514701716",
     "status": "ok",
     "as_of": [
-     "ledger version 7991744038",
-     "ledger version 7991744060"
+     "ledger version 7993359404",
+     "ledger version 7993359412"
     ]
    },
    {
@@ -86,14 +86,14 @@
     "supply": "511342.197125837",
     "status": "ok",
     "as_of": [
-     "finalized slot 467827585",
-     "finalized slot 467827586"
+     "finalized slot 467872395",
+     "finalized slot 467872397"
     ]
    }
   ]
  },
  "BUIDL": {
-  "taken": "2026-11-10T18:50Z",
+  "taken": "2026-11-10T21:30Z",
   "rows": [
    {
     "chain": "ethereum",
@@ -102,8 +102,8 @@
     "supply": "170226737.157549",
     "status": "ok",
     "as_of": [
-     "finalized block 26386351",
-     "finalized block 26386351"
+     "finalized block 26387146",
+     "finalized block 26387114"
     ]
    },
    {
@@ -113,19 +113,19 @@
     "supply": "144103743.045100",
     "status": "ok",
     "as_of": [
-     "finalized block 26386351",
-     "finalized block 26386351"
+     "finalized block 26387146",
+     "finalized block 26387114"
     ]
    },
    {
     "chain": "solana",
     "class": "BUIDL",
     "address": "GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr",
-    "supply": "490827334.4",
+    "supply": "483827334.4",
     "status": "ok",
     "as_of": [
-     "finalized slot 467827431",
-     "finalized slot 467827433"
+     "finalized slot 467872259",
+     "finalized slot 467872261"
     ]
    },
    {
@@ -135,8 +135,8 @@
     "supply": "356359217.490000",
     "status": "ok",
     "as_of": [
-     "finalized block 99960706",
-     "finalized block 99960707"
+     "finalized block 99969701",
+     "finalized block 99969702"
     ]
    },
    {
@@ -146,8 +146,8 @@
     "supply": "277532492.635000",
     "status": "ok",
     "as_of": [
-     "finalized block 132827271",
-     "finalized block 132827271"
+     "finalized block 132848561",
+     "finalized block 132848561"
     ]
    },
    {
@@ -157,8 +157,8 @@
     "supply": "157418928.490000",
     "status": "ok",
     "as_of": [
-     "ledger version 7991739452",
-     "ledger version 7991739475"
+     "ledger version 7993356163",
+     "ledger version 7993356191"
     ]
    },
    {
@@ -168,8 +168,8 @@
     "supply": "26575157.770000",
     "status": "ok",
     "as_of": [
-     "finalized block 159368311",
-     "finalized block 159368311"
+     "finalized block 159373129",
+     "finalized block 159373129"
     ]
    },
    {
@@ -179,8 +179,8 @@
     "supply": "17174363.990000",
     "status": "ok",
     "as_of": [
-     "finalized block 48388773",
-     "finalized block 48388775"
+     "finalized block 48406541",
+     "finalized block 48406541"
     ]
    },
    {
@@ -190,8 +190,8 @@
     "supply": "12630305.630000",
     "status": "ok",
     "as_of": [
-     "finalized block 523059090",
-     "finalized block 523059090"
+     "finalized block 523092270",
+     "finalized block 523093877"
     ]
    },
    {
@@ -201,14 +201,14 @@
     "supply": "10478611.200000",
     "status": "ok",
     "as_of": [
-     "finalized block 97087453",
-     "finalized block 97087453"
+     "finalized block 97093840",
+     "finalized block 97093840"
     ]
    }
   ]
  },
  "EUTBL": {
-  "taken": "2026-11-10T18:50Z",
+  "taken": "2026-11-10T21:30Z",
   "rows": [
    {
     "chain": "ethereum",
@@ -217,8 +217,8 @@
     "supply": "20390129.56520",
     "status": "ok",
     "as_of": [
-     "finalized block 26386351",
-     "finalized block 26386351"
+     "finalized block 26387146",
+     "finalized block 26387146"
     ]
    },
    {
@@ -228,8 +228,8 @@
     "supply": "129279744.15383",
     "status": "ok",
     "as_of": [
-     "finalized block 523059090",
-     "finalized block 523059090"
+     "finalized block 523093877",
+     "finalized block 523093877"
     ]
    },
    {
@@ -239,8 +239,8 @@
     "supply": "15400080.55881",
     "status": "ok",
     "as_of": [
-     "finalized block 55727193",
-     "finalized block 55725155"
+     "finalized block 55774992",
+     "finalized block 55773224"
     ]
    },
    {
@@ -250,8 +250,8 @@
     "supply": "38501409.30413",
     "status": "ok",
     "as_of": [
-     "finalized block 97087470",
-     "finalized block 97087470"
+     "finalized block 97093856",
+     "finalized block 97093856"
     ]
    },
    {
@@ -261,8 +261,8 @@
     "supply": "1441048.22691",
     "status": "ok",
     "as_of": [
-     "finalized block 57667667",
-     "finalized block 57667667"
+     "finalized block 57676179",
+     "finalized block 57676179"
     ]
    },
    {
@@ -272,8 +272,8 @@
     "supply": "75033.65977",
     "status": "ok",
     "as_of": [
-     "block 17759770",
-     "block 17759770"
+     "block 17765513",
+     "block 17765515"
     ]
    },
    {
@@ -283,8 +283,8 @@
     "supply": "196860305.19647",
     "status": "ok",
     "as_of": [
-     "ledger 65410128",
-     "ledger 65410128"
+     "ledger 65412044",
+     "ledger 65412044"
     ]
    }
   ]

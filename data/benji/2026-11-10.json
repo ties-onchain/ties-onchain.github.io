@@ -1,23 +1,23 @@
 {
  "fund": "BENJI",
- "taken": "2026-11-10T18:50Z",
+ "taken": "2026-11-10T21:30Z",
  "rows": [
   {
    "chain": "stellar",
    "class": "BENJI",
    "address": "BENJI-GBHNGLLIE3KWGKCHIKMHJ5HVZHYIK7WTBE4QF5PLAKL4CJGSEU7HZIW5",
-   "supply": "1150569580.6938728",
+   "supply": "1172569580.6938728",
    "status": "ok",
    "reads": [
     {
      "provider": "horizon.stellar.org",
-     "as_of": "ledger 65410119",
-     "supply": "1150569580.6938728"
+     "as_of": "ledger 65412035",
+     "supply": "1172569580.6938728"
     },
     {
      "provider": "horizon.stellar.lobstr.co",
-     "as_of": "ledger 65410119",
-     "supply": "1150569580.6938728"
+     "as_of": "ledger 65412035",
+     "supply": "1172569580.6938728"
     }
    ]
   },
@@ -30,12 +30,12 @@
    "reads": [
     {
      "provider": "mainnet.base.org",
-     "as_of": "finalized block 55727193",
+     "as_of": "finalized block 55774992",
      "supply": "27655261.256857990886549473"
     },
     {
      "provider": "base.drpc.org",
-     "as_of": "finalized block 55725155",
+     "as_of": "finalized block 55773224",
      "supply": "27655261.256857990886549473"
     }
    ]
@@ -49,12 +49,12 @@
    "reads": [
     {
      "provider": "arb1.arbitrum.io",
-     "as_of": "finalized block 523059090",
+     "as_of": "finalized block 523093877",
      "supply": "20849018.740256497971895881"
     },
     {
      "provider": "arb-pokt.nodies.app",
-     "as_of": "finalized block 523059090",
+     "as_of": "finalized block 523093877",
      "supply": "20849018.740256497971895881"
     }
    ]
@@ -68,12 +68,12 @@
    "reads": [
     {
      "provider": "ethereum-rpc.publicnode.com",
-     "as_of": "finalized block 26386351",
+     "as_of": "finalized block 26387146",
      "supply": "16085674.701634014595950007"
     },
     {
      "provider": "eth.drpc.org",
-     "as_of": "finalized block 26386351",
+     "as_of": "finalized block 26387146",
      "supply": "16085674.701634014595950007"
     }
    ]
@@ -87,12 +87,12 @@
    "reads": [
     {
      "provider": "avalanche-c-chain-rpc.publicnode.com",
-     "as_of": "finalized block 99960736",
+     "as_of": "finalized block 99969723",
      "supply": "2118291.927905249458870080"
     },
     {
      "provider": "api.avax.network",
-     "as_of": "finalized block 99960736",
+     "as_of": "finalized block 99969723",
      "supply": "2118291.927905249458870080"
     }
    ]
@@ -106,12 +106,12 @@
    "reads": [
     {
      "provider": "polygon-bor-rpc.publicnode.com",
-     "as_of": "finalized block 97087463",
+     "as_of": "finalized block 97093849",
      "supply": "5408.704057792311800157"
     },
     {
      "provider": "polygon.drpc.org",
-     "as_of": "finalized block 97087463",
+     "as_of": "finalized block 97093849",
      "supply": "5408.704057792311800157"
     }
    ]
@@ -125,12 +125,12 @@
    "reads": [
     {
      "provider": "fullnode.mainnet.aptoslabs.com",
-     "as_of": "ledger version 7991744038",
+     "as_of": "ledger version 7993359404",
      "supply": "14783332.514701716"
     },
     {
      "provider": "aptos-rest.publicnode.com",
-     "as_of": "ledger version 7991744060",
+     "as_of": "ledger version 7993359412",
      "supply": "14783332.514701716"
     }
    ]
@@ -144,12 +144,12 @@
    "reads": [
     {
      "provider": "api.mainnet-beta.solana.com",
-     "as_of": "finalized slot 467827585",
+     "as_of": "finalized slot 467872395",
      "supply": "511342.197125837"
     },
     {
      "provider": "solana-mainnet.gateway.tatum.io",
-     "as_of": "finalized slot 467827586",
+     "as_of": "finalized slot 467872397",
      "supply": "511342.197125837"
     }
    ]

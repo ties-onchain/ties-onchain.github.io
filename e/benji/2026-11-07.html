@@ -39,6 +39,7 @@ a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 0
 .mark { font-weight: 700; font-size: 1.375rem; letter-spacing: -0.03em; margin: 0; }
 .mark span { font-weight: 400; font-size: 0.9375rem; letter-spacing: 0; color: var(--fg-2); margin-left: 0.625rem; }
 .stamp { margin: 0; color: var(--fg-2); font-size: 0.875rem; }
+.late { margin: 0; padding: 0.75rem 1rem; border-radius: 8px; background: var(--wash); color: var(--warn); font-weight: 500; }
 
 .intro { display: grid; gap: 1rem; }
 h1 { font-size: 2.75rem; line-height: 1.06; font-weight: 700; letter-spacing: -0.035em; margin: 0; max-width: 18ch; text-wrap: balance; }
@@ -134,6 +135,8 @@ h2 { font-size: 1.625rem; line-height: 1.15; margin: 0; font-weight: 700; letter
 .recon { display: grid; gap: 0.75rem; margin-top: 1rem; }
 .recon h3 { font-size: 1.0625rem; margin: 0; }
 .recon .note { max-width: 70ch; }
+.chg.off { color: var(--warn); }
+.chg.exact { color: var(--ok); }
 .mv { font-size: 0.6875rem; vertical-align: 0.1em; }
 .quiet { color: var(--fg-2); }
 .method { display: grid; gap: 1.25rem; border-top: 1px solid var(--rule); padding-top: 2rem; }
@@ -151,6 +154,7 @@ footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--ru
   .finding h3 { font-size: 1.4rem; }
   .ledger { min-width: 0; }
   .chains .addr, .chains th:nth-child(4), .chains td:nth-child(4), .recon-t th:nth-child(5), .recon-t td:nth-child(5), .conf .ctext { display: none; }
+  .flows-t th:nth-child(3), .flows-t td:nth-child(3), .flows-t th:nth-child(6), .flows-t td:nth-child(6) { display: none; }
   .cmp-row { grid-template-columns: 1fr; }
   .mv-list li { grid-template-columns: 1fr auto; }
   .mv-list .quiet { display: none; }

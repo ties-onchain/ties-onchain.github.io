@@ -1,6 +1,6 @@
 {
  "fund": "EUTBL",
- "taken": "2026-11-10T18:50Z",
+ "taken": "2026-11-10T21:30Z",
  "rows": [
   {
    "chain": "ethereum",
@@ -11,12 +11,12 @@
    "reads": [
     {
      "provider": "ethereum-rpc.publicnode.com",
-     "as_of": "finalized block 26386351",
+     "as_of": "finalized block 26387146",
      "supply": "20390129.56520"
     },
     {
      "provider": "eth.drpc.org",
-     "as_of": "finalized block 26386351",
+     "as_of": "finalized block 26387146",
      "supply": "20390129.56520"
     }
    ]
@@ -30,12 +30,12 @@
    "reads": [
     {
      "provider": "arb1.arbitrum.io",
-     "as_of": "finalized block 523059090",
+     "as_of": "finalized block 523093877",
      "supply": "129279744.15383"
     },
     {
      "provider": "arb-pokt.nodies.app",
-     "as_of": "finalized block 523059090",
+     "as_of": "finalized block 523093877",
      "supply": "129279744.15383"
     }
    ]
@@ -49,12 +49,12 @@
    "reads": [
     {
      "provider": "mainnet.base.org",
-     "as_of": "finalized block 55727193",
+     "as_of": "finalized block 55774992",
      "supply": "15400080.55881"
     },
     {
      "provider": "base.drpc.org",
-     "as_of": "finalized block 55725155",
+     "as_of": "finalized block 55773224",
      "supply": "15400080.55881"
     }
    ]
@@ -68,12 +68,12 @@
    "reads": [
     {
      "provider": "polygon-bor-rpc.publicnode.com",
-     "as_of": "finalized block 97087470",
+     "as_of": "finalized block 97093856",
      "supply": "38501409.30413"
     },
     {
      "provider": "polygon.drpc.org",
-     "as_of": "finalized block 97087470",
+     "as_of": "finalized block 97093856",
      "supply": "38501409.30413"
     }
    ]
@@ -87,12 +87,12 @@
    "reads": [
     {
      "provider": "node.mainnet.etherlink.com",
-     "as_of": "finalized block 57667667",
+     "as_of": "finalized block 57676179",
      "supply": "1441048.22691"
     },
     {
      "provider": "rpc.ankr.com",
-     "as_of": "finalized block 57667667",
+     "as_of": "finalized block 57676179",
      "supply": "1441048.22691"
     }
    ]
@@ -106,12 +106,12 @@
    "reads": [
     {
      "provider": "starknet-rpc.publicnode.com",
-     "as_of": "block 17759770",
+     "as_of": "block 17765513",
      "supply": "75033.65977"
     },
     {
      "provider": "api.zan.top",
-     "as_of": "block 17759770",
+     "as_of": "block 17765515",
      "supply": "75033.65977"
     }
    ]
@@ -125,12 +125,12 @@
    "reads": [
     {
      "provider": "soroban-rpc.mainnet.stellar.gateway.fm",
-     "as_of": "ledger 65410128",
+     "as_of": "ledger 65412044",
      "supply": "196860305.19647"
     },
     {
      "provider": "rpc.lightsail.network",
-     "as_of": "ledger 65410128",
+     "as_of": "ledger 65412044",
      "supply": "196860305.19647"
     }
    ]
