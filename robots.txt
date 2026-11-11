@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ties-onchain.github.io/sitemap.xml
