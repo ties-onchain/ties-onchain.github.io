@@ -1,256 +1,257 @@
 {
  "BENJI": {
-  "taken": "2026-11-12T21:30Z",
+  "taken": "2026-11-13T21:30Z",
   "rows": [
    {
     "chain": "stellar",
     "class": "BENJI",
     "address": "BENJI-GBHNGLLIE3KWGKCHIKMHJ5HVZHYIK7WTBE4QF5PLAKL4CJGSEU7HZIW5",
-    "supply": "1218553400.1894955",
+    "supply": "1198095657.7912281",
     "status": "ok",
     "as_of": [
-     "ledger 65446595",
-     "ledger 65446595"
+     "ledger 65463875",
+     "ledger 65463875"
     ]
    },
    {
     "chain": "base",
     "class": "BENJI",
     "address": "0x60cfc2b186a4cf647486e42c42b11cc6d571d1e4",
-    "supply": "27661002.572060698375763712",
+    "supply": "27663877.822634053797117077",
     "status": "ok",
     "as_of": [
-     "finalized block 56638993",
-     "finalized block 56637306"
+     "finalized block 57071062",
+     "finalized block 57069174"
     ]
    },
    {
     "chain": "arbitrum",
     "class": "BENJI",
     "address": "0xb9e4765bce2609bc1949592059b17ea72fee6c6a",
-    "supply": "20853347.059094031441442459",
+    "supply": "20855514.681107436029634667",
     "status": "ok",
     "as_of": [
-     "finalized block 523674595",
-     "finalized block 523676438"
+     "finalized block 523973899",
+     "finalized block 523973899"
     ]
    },
    {
     "chain": "ethereum",
     "class": "BENJI",
     "address": "0x3ddc84940ab509c11b20b76b466933f40b750dc9",
-    "supply": "16089014.135959097922126415",
+    "supply": "16090686.524622474326519026",
     "status": "ok",
     "as_of": [
-     "finalized block 26401499",
-     "finalized block 26401499"
+     "finalized block 26408678",
+     "finalized block 26408678"
     ]
    },
    {
     "chain": "avalanche",
     "class": "BENJI",
     "address": "0xe08b4c1005603427420e64252a8b120cace4d122",
-    "supply": "2118731.691664358372352975",
+    "supply": "2118951.925348780115748346",
     "status": "ok",
     "as_of": [
-     "finalized block 100145906",
-     "finalized block 100145906"
+     "finalized block 100237721",
+     "finalized block 100237722"
     ]
    },
    {
     "chain": "polygon",
     "class": "BENJI",
     "address": "0x408a634b8a8f0de729b48574a3a7ec3fe820b00a",
-    "supply": "5409.826920980821657408",
+    "supply": "5410.389250849949929894",
     "status": "ok",
     "as_of": [
-     "finalized block 97209048",
-     "finalized block 97209048"
+     "finalized block 97266640",
+     "finalized block 97266640"
     ]
    },
    {
     "chain": "aptos",
     "class": "BENJI",
     "address": "0x100589a94461253007bb31ab4511953f37aa8967e2b22077f740e492f3a1900f",
-    "supply": "14786401.578881765",
+    "supply": "14787938.566180283",
     "status": "ok",
     "as_of": [
-     "ledger version 8023112465",
-     "ledger version 8023112496"
+     "ledger version 8038809859",
+     "ledger version 8038809891"
     ]
    },
    {
     "chain": "solana",
     "class": "BENJI",
     "address": "5Tu84fKBpe9vfXeotjvfvWdWbAjy3hqsExvuHgFqFxA1",
-    "supply": "511448.353184223",
-    "status": "single provider",
+    "supply": "511501.516194743",
+    "status": "ok",
     "as_of": [
-     "finalized slot 468676479"
+     "finalized slot 469077407",
+     "finalized slot 469077409"
     ]
    }
   ]
  },
  "BUIDL": {
-  "taken": "2026-11-12T21:30Z",
+  "taken": "2026-11-13T21:30Z",
   "rows": [
    {
     "chain": "ethereum",
     "class": "BUIDL",
     "address": "0x7712c34205737192402172409a8f7ccef8aa2aec",
-    "supply": "170259070.337549",
+    "supply": "170275395.777549",
     "status": "ok",
     "as_of": [
-     "finalized block 26401499",
-     "finalized block 26401467"
+     "finalized block 26408678",
+     "finalized block 26408646"
     ]
    },
    {
     "chain": "ethereum",
     "class": "BUIDL-I",
     "address": "0x6a9DA2D710BB9B700acde7Cb81F10F1fF8C89041",
-    "supply": "144133719.505100",
+    "supply": "239148842.735100",
     "status": "ok",
     "as_of": [
-     "finalized block 26401499",
-     "finalized block 26401467"
+     "finalized block 26408678",
+     "finalized block 26408646"
     ]
    },
    {
     "chain": "solana",
     "class": "BUIDL",
     "address": "GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr",
-    "supply": "482074148.78",
+    "supply": "467301907.66",
     "status": "ok",
     "as_of": [
-     "finalized slot 468676347",
-     "finalized slot 468676349"
+     "finalized slot 469077279",
+     "finalized slot 469077280"
     ]
    },
    {
     "chain": "avalanche",
     "class": "BUIDL",
     "address": "0x53fc82f14f009009b440a706e31c9021e1196a2f",
-    "supply": "356432765.750000",
+    "supply": "356469873.610000",
     "status": "ok",
     "as_of": [
-     "finalized block 100145879",
-     "finalized block 100145881"
+     "finalized block 100237699",
+     "finalized block 100237699"
     ]
    },
    {
     "chain": "bsc",
     "class": "BUIDL",
     "address": "0x2d5bdc96d9c8aabbdb38c9a27398513e7e5ef84f",
-    "supply": "277590073.955000",
+    "supply": "277619124.585000",
     "status": "ok",
     "as_of": [
-     "finalized block 133232181",
-     "finalized block 133232180"
+     "finalized block 133423992",
+     "finalized block 133423992"
     ]
    },
    {
     "chain": "aptos",
     "class": "BUIDL",
     "address": "0x50038be55be5b964cfa32cf128b5cf05f123959f286b4cc02b86cafd48945f89",
-    "supply": "57451417.550000",
+    "supply": "59457399.800000",
     "status": "ok",
     "as_of": [
-     "ledger version 8023109035",
-     "ledger version 8023109035"
+     "ledger version 8038806338",
+     "ledger version 8038806360"
     ]
    },
    {
     "chain": "optimism",
     "class": "BUIDL",
     "address": "0xa1cdab15bba75a80df4089cafba013e376957cf5",
-    "supply": "26580205.610000",
+    "supply": "26582754.330000",
     "status": "ok",
     "as_of": [
-     "finalized block 159459526",
-     "finalized block 159459526"
+     "finalized block 159502704",
+     "finalized block 159502704"
     ]
    },
    {
     "chain": "tempo",
     "class": "BUIDL",
     "address": "0xb5ff12bd8010baef823d1bfa2ce6bdc0109cbb24",
-    "supply": "17177908.270000",
+    "supply": "17179696.490000",
     "status": "ok",
     "as_of": [
-     "finalized block 48723818",
-     "finalized block 48723819"
+     "finalized block 48884565",
+     "finalized block 48884565"
     ]
    },
    {
     "chain": "arbitrum",
     "class": "BUIDL",
     "address": "0xa6525ae43edcd03dc08e775774dcabd3bb925872",
-    "supply": "12632704.760000",
+    "supply": "12633916.130000",
     "status": "ok",
     "as_of": [
-     "finalized block 523674595",
-     "finalized block 523674595"
+     "finalized block 523972781",
+     "finalized block 523973899"
     ]
    },
    {
     "chain": "polygon",
     "class": "BUIDL",
     "address": "0x2893ef551b6dd69f661ac00f11d93e5dc5dc0e99",
-    "supply": "10480773.880000",
+    "supply": "10481865.020000",
     "status": "ok",
     "as_of": [
-     "finalized block 97209039",
-     "finalized block 97209039"
+     "finalized block 97266632",
+     "finalized block 97266632"
     ]
    }
   ]
  },
  "EUTBL": {
-  "taken": "2026-11-12T21:30Z",
+  "taken": "2026-11-13T21:30Z",
   "rows": [
    {
     "chain": "ethereum",
     "class": "EUTBL",
     "address": "0xa0769f7a8fc65e47de93797b4e21c073c117fc80",
-    "supply": "20390130.50616",
+    "supply": "20438310.48871",
     "status": "ok",
     "as_of": [
-     "finalized block 26401499",
-     "finalized block 26401499"
+     "finalized block 26408678",
+     "finalized block 26408678"
     ]
    },
    {
     "chain": "arbitrum",
     "class": "EUTBL",
     "address": "0xcbeb19549054cc0a6257a77736fc78c367216ce7",
-    "supply": "129977691.77889",
+    "supply": "129717030.43898",
     "status": "ok",
     "as_of": [
-     "finalized block 523676438",
-     "finalized block 523676438"
+     "finalized block 523973899",
+     "finalized block 523973899"
     ]
    },
    {
     "chain": "base",
     "class": "EUTBL",
     "address": "0xa0769f7a8fc65e47de93797b4e21c073c117fc80",
-    "supply": "15351456.91191",
+    "supply": "15629363.54182",
     "status": "ok",
     "as_of": [
-     "finalized block 56638993",
-     "finalized block 56638993"
+     "finalized block 57071062",
+     "finalized block 57069174"
     ]
    },
    {
     "chain": "polygon",
     "class": "EUTBL",
     "address": "0xa0769f7a8fc65e47de93797b4e21c073c117fc80",
-    "supply": "38490757.66757",
+    "supply": "39052477.09917",
     "status": "ok",
     "as_of": [
-     "finalized block 97209124",
-     "finalized block 97209122"
+     "finalized block 97266647",
+     "finalized block 97266647"
     ]
    },
    {
@@ -260,8 +261,8 @@
     "supply": "1441048.22691",
     "status": "ok",
     "as_of": [
-     "finalized block 57809507",
-     "finalized block 57809507"
+     "finalized block 57877147",
+     "finalized block 57877147"
     ]
    },
    {
@@ -271,19 +272,19 @@
     "supply": "75033.65977",
     "status": "ok",
     "as_of": [
-     "block 17868821",
-     "block 17868823"
+     "block 17920309",
+     "block 17920310"
     ]
    },
    {
     "chain": "stellar",
     "class": "EUTBL",
     "address": "CBGV2QFQBBGEQRUKUMCPO3SZOHDDYO6SCP5CH6TW7EALKVHCXTMWDDOF",
-    "supply": "198778228.83062",
+    "supply": "198557537.01781",
     "status": "ok",
     "as_of": [
-     "ledger 65446624",
-     "ledger 65446624"
+     "ledger 65463884",
+     "ledger 65463884"
     ]
    }
   ]
