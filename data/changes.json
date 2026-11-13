@@ -1,1 +1,232 @@
-[]
+[
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "arbitrum-0x7e9de82611edbd29f6db9b3155c44850599157ce39dbe45110a134fec8076e3b",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "arbitrum-0x7e9de82611edbd29f6db9b3155c44850599157ce39dbe45110a134fec8076e3b-1",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "arbitrum-0x7e9de82611edbd29f6db9b3155c44850599157ce39dbe45110a134fec8076e3b-2",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "arbitrum-0x7e9de82611edbd29f6db9b3155c44850599157ce39dbe45110a134fec8076e3b-3",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "arbitrum-0x7e9de82611edbd29f6db9b3155c44850599157ce39dbe45110a134fec8076e3b-4",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "arbitrum-0x7e9de82611edbd29f6db9b3155c44850599157ce39dbe45110a134fec8076e3b-5",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "arbitrum-0x7e9de82611edbd29f6db9b3155c44850599157ce39dbe45110a134fec8076e3b-6",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "arbitrum-0x7e9de82611edbd29f6db9b3155c44850599157ce39dbe45110a134fec8076e3b-7",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "avalanche-0x93187537c476fb2941e97911f1a2a3095486973beaf41c6980fd834101c5d5b4",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "avalanche-0x93187537c476fb2941e97911f1a2a3095486973beaf41c6980fd834101c5d5b4-1",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "avalanche-0x93187537c476fb2941e97911f1a2a3095486973beaf41c6980fd834101c5d5b4-2",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "avalanche-0x93187537c476fb2941e97911f1a2a3095486973beaf41c6980fd834101c5d5b4-3",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "solana-4nUiEjCfAQDj4cdv6GtzYNfyAKhy1twycyX5yD9ZsuzXqNE9SqPG7tTLuS41yvBkQ5CsNkuF8xBZesQjSEKDMuJ",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "polygon-0xb1d7e3d6c59cee841d01e78337a4200b3090610a5ea6afb042259b8a9e9b5058",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "polygon-0xb1d7e3d6c59cee841d01e78337a4200b3090610a5ea6afb042259b8a9e9b5058-1",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "polygon-0xb1d7e3d6c59cee841d01e78337a4200b3090610a5ea6afb042259b8a9e9b5058-2",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "base-0xd62dbce654efd1d67d7574aad8b1e5eac9b326b570c21159066f49edadbda544",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "base-0xd62dbce654efd1d67d7574aad8b1e5eac9b326b570c21159066f49edadbda544-1",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "base-0xd62dbce654efd1d67d7574aad8b1e5eac9b326b570c21159066f49edadbda544-2",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "base-0xd62dbce654efd1d67d7574aad8b1e5eac9b326b570c21159066f49edadbda544-3",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "ethereum-0x59fa1e611b7251457f865d1feda342a10b3570ee2c3d1b379a02d9ac9c619c2c",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "ethereum-0x59fa1e611b7251457f865d1feda342a10b3570ee2c3d1b379a02d9ac9c619c2c-1",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ },
+ {
+  "seen": "2026-11-13T06:44:08Z",
+  "model": "9fd8ca7",
+  "fund": "BENJI",
+  "day": "2026-11-11",
+  "id": "ethereum-0x59fa1e611b7251457f865d1feda342a10b3570ee2c3d1b379a02d9ac9c619c2c-2",
+  "change": "kind",
+  "old": "unknown",
+  "new": "dividend"
+ }
+]
