@@ -10,7 +10,8 @@
   "data/benji/2026-11-11.json",
   "data/benji/2026-11-12.json",
   "data/benji/2026-11-13.json",
-  "data/benji/2026-11-14.json"
+  "data/benji/2026-11-14.json",
+  "data/benji/2026-11-15.json"
  ],
  "BUIDL": [
   "data/buidl/2026-11-04.json",
@@ -23,13 +24,15 @@
   "data/buidl/2026-11-11.json",
   "data/buidl/2026-11-12.json",
   "data/buidl/2026-11-13.json",
-  "data/buidl/2026-11-14.json"
+  "data/buidl/2026-11-14.json",
+  "data/buidl/2026-11-15.json"
  ],
  "EUTBL": [
   "data/eutbl/2026-11-10.json",
   "data/eutbl/2026-11-11.json",
   "data/eutbl/2026-11-12.json",
   "data/eutbl/2026-11-13.json",
-  "data/eutbl/2026-11-14.json"
+  "data/eutbl/2026-11-14.json",
+  "data/eutbl/2026-11-15.json"
  ]
 }
