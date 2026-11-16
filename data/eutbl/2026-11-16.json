@@ -1,0 +1,139 @@
+{
+ "fund": "EUTBL",
+ "taken": "2026-11-16T21:30Z",
+ "rows": [
+  {
+   "chain": "ethereum",
+   "class": "EUTBL",
+   "address": "0xa0769f7a8fc65e47de93797b4e21c073c117fc80",
+   "supply": "20438310.51733",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "ethereum-rpc.publicnode.com",
+     "as_of": "finalized block 26430226",
+     "supply": "20438310.51733"
+    },
+    {
+     "provider": "eth.drpc.org",
+     "as_of": "finalized block 26430226",
+     "supply": "20438310.51733"
+    }
+   ]
+  },
+  {
+   "chain": "arbitrum",
+   "class": "EUTBL",
+   "address": "0xcbeb19549054cc0a6257a77736fc78c367216ce7",
+   "supply": "128549049.75565",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "arb1.arbitrum.io",
+     "as_of": "finalized block 524857906",
+     "supply": "128549049.75565"
+    },
+    {
+     "provider": "arb-pokt.nodies.app",
+     "as_of": "finalized block 524857906",
+     "supply": "128549049.75565"
+    }
+   ]
+  },
+  {
+   "chain": "base",
+   "class": "EUTBL",
+   "address": "0xa0769f7a8fc65e47de93797b4e21c073c117fc80",
+   "supply": "15624880.97913",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "mainnet.base.org",
+     "as_of": "finalized block 58367053",
+     "supply": "15624880.97913"
+    },
+    {
+     "provider": "base.drpc.org",
+     "as_of": "finalized block 58365147",
+     "supply": "15624880.97913"
+    }
+   ]
+  },
+  {
+   "chain": "polygon",
+   "class": "EUTBL",
+   "address": "0xa0769f7a8fc65e47de93797b4e21c073c117fc80",
+   "supply": "38915514.69454",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "polygon-bor-rpc.publicnode.com",
+     "as_of": "finalized block 97439455",
+     "supply": "38915514.69454"
+    },
+    {
+     "provider": "polygon.drpc.org",
+     "as_of": "finalized block 97439453",
+     "supply": "38915514.69454"
+    }
+   ]
+  },
+  {
+   "chain": "etherlink",
+   "class": "EUTBL",
+   "address": "0xa0769f7a8fc65e47de93797b4e21c073c117fc80",
+   "supply": "970684.88064",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "node.mainnet.etherlink.com",
+     "as_of": "finalized block 58189479",
+     "supply": "970684.88064"
+    },
+    {
+     "provider": "rpc.ankr.com",
+     "as_of": "finalized block 58189479",
+     "supply": "970684.88064"
+    }
+   ]
+  },
+  {
+   "chain": "starknet",
+   "class": "EUTBL",
+   "address": "0x04f5e0de717daa6aa8de63b1bf2e8d7823ec5b21a88461b1519d9dbc956fb7f2",
+   "supply": "75033.65977",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "starknet-rpc.publicnode.com",
+     "as_of": "block 18075011",
+     "supply": "75033.65977"
+    },
+    {
+     "provider": "api.zan.top",
+     "as_of": "block 18075011",
+     "supply": "75033.65977"
+    }
+   ]
+  },
+  {
+   "chain": "stellar",
+   "class": "EUTBL",
+   "address": "CBGV2QFQBBGEQRUKUMCPO3SZOHDDYO6SCP5CH6TW7EALKVHCXTMWDDOF",
+   "supply": "198352007.75345",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "soroban-rpc.mainnet.stellar.gateway.fm",
+     "as_of": "ledger 65515726",
+     "supply": "198352007.75345"
+    },
+    {
+     "provider": "rpc.lightsail.network",
+     "as_of": "ledger 65515726",
+     "supply": "198352007.75345"
+    }
+   ]
+  }
+ ]
+}
