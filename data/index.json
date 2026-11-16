@@ -37,5 +37,8 @@
   "data/eutbl/2026-11-14.json",
   "data/eutbl/2026-11-15.json",
   "data/eutbl/2026-11-16.json"
+ ],
+ "USDY": [
+  "data/usdy/2026-11-16.json"
  ]
 }
