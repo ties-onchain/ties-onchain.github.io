@@ -1,0 +1,77 @@
+{
+ "fund": "OUSG",
+ "taken": "2026-11-21T21:30Z",
+ "rows": [
+  {
+   "chain": "ethereum",
+   "class": "OUSG",
+   "address": "0x1B19C19393e2d034D8Ff31ff34c81252FcBbee92",
+   "supply": "1093814.204074424530996953",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "ethereum-rpc.publicnode.com",
+     "as_of": "finalized block 26466112",
+     "supply": "1093814.204074424530996953"
+    },
+    {
+     "provider": "eth.drpc.org",
+     "as_of": "finalized block 26466112",
+     "supply": "1093814.204074424530996953"
+    }
+   ]
+  },
+  {
+   "chain": "xrpl",
+   "class": "OUSG",
+   "address": "OUSG-rHuiXXjHLpMP8ZE9sSQU5aADQVWDwv6h5p",
+   "supply": "1584220.172977341",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "xrplcluster.com",
+     "as_of": "validated ledger 108483370",
+     "supply": "1584220.172977341"
+    },
+    {
+     "provider": "s1.ripple.com:51234",
+     "as_of": "validated ledger 108483370",
+     "supply": "1584220.172977341"
+    }
+   ]
+  },
+  {
+   "chain": "polygon",
+   "class": "OUSG",
+   "address": "0xbA11C5effA33c4D6F8f593CFA394241CfE925811",
+   "supply": "0E-18",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "polygon-bor-rpc.publicnode.com",
+     "as_of": "finalized block 97727497",
+     "supply": "0E-18"
+    },
+    {
+     "provider": "polygon.drpc.org",
+     "as_of": "finalized block 97727497",
+     "supply": "0E-18"
+    }
+   ]
+  },
+  {
+   "chain": "solana",
+   "class": "OUSG",
+   "address": "i7u4r16TcsJTgq1kAG8opmVZyVnAKBwLKu6ZPMwzxNc",
+   "supply": "0",
+   "status": "single provider",
+   "reads": [
+    {
+     "provider": "api.mainnet-beta.solana.com",
+     "as_of": "finalized slot 472290713",
+     "supply": "0"
+    }
+   ]
+  }
+ ]
+}
