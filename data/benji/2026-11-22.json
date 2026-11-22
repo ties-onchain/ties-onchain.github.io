@@ -1,0 +1,158 @@
+{
+ "fund": "BENJI",
+ "taken": "2026-11-22T21:30Z",
+ "rows": [
+  {
+   "chain": "stellar",
+   "class": "BENJI",
+   "address": "BENJI-GBHNGLLIE3KWGKCHIKMHJ5HVZHYIK7WTBE4QF5PLAKL4CJGSEU7HZIW5",
+   "supply": "1303335761.6790023",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "horizon.stellar.org",
+     "as_of": "ledger 65619396",
+     "supply": "1303335761.6790023"
+    },
+    {
+     "provider": "horizon.stellar.lobstr.co",
+     "as_of": "ledger 65619396",
+     "supply": "1303335761.6790023"
+    }
+   ]
+  },
+  {
+   "chain": "base",
+   "class": "BENJI",
+   "address": "0x60cfc2b186a4cf647486e42c42b11cc6d571d1e4",
+   "supply": "27689840.591185216621187483",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "mainnet.base.org",
+     "as_of": "finalized block 60957285",
+     "supply": "27689840.591185216621187483"
+    },
+    {
+     "provider": "base.drpc.org",
+     "as_of": "finalized block 60957285",
+     "supply": "27689840.591185216621187483"
+    }
+   ]
+  },
+  {
+   "chain": "arbitrum",
+   "class": "BENJI",
+   "address": "0xb9e4765bce2609bc1949592059b17ea72fee6c6a",
+   "supply": "20875087.746899316909389156",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "arb1.arbitrum.io",
+     "as_of": "finalized block 526619569",
+     "supply": "20875087.746899316909389156"
+    },
+    {
+     "provider": "arb-pokt.nodies.app",
+     "as_of": "finalized block 526619569",
+     "supply": "20875087.746899316909389156"
+    }
+   ]
+  },
+  {
+   "chain": "ethereum",
+   "class": "BENJI",
+   "address": "0x3ddc84940ab509c11b20b76b466933f40b750dc9",
+   "supply": "16105787.761431953206169048",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "ethereum-rpc.publicnode.com",
+     "as_of": "finalized block 26473295",
+     "supply": "16105787.761431953206169048"
+    },
+    {
+     "provider": "eth.drpc.org",
+     "as_of": "finalized block 26473295",
+     "supply": "16105787.761431953206169048"
+    }
+   ]
+  },
+  {
+   "chain": "avalanche",
+   "class": "BENJI",
+   "address": "0xe08b4c1005603427420e64252a8b120cace4d122",
+   "supply": "2120940.578521758632215455",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "avalanche-c-chain-rpc.publicnode.com",
+     "as_of": "finalized block 101104089",
+     "supply": "2120940.578521758632215455"
+    },
+    {
+     "provider": "api.avax.network",
+     "as_of": "finalized block 101104090",
+     "supply": "2120940.578521758632215455"
+    }
+   ]
+  },
+  {
+   "chain": "polygon",
+   "class": "BENJI",
+   "address": "0x408a634b8a8f0de729b48574a3a7ec3fe820b00a",
+   "supply": "5415.466944034980832923",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "polygon-bor-rpc.publicnode.com",
+     "as_of": "finalized block 97785048",
+     "supply": "5415.466944034980832923"
+    },
+    {
+     "provider": "polygon.drpc.org",
+     "as_of": "finalized block 97785047",
+     "supply": "5415.466944034980832923"
+    }
+   ]
+  },
+  {
+   "chain": "aptos",
+   "class": "BENJI",
+   "address": "0x100589a94461253007bb31ab4511953f37aa8967e2b22077f740e492f3a1900f",
+   "supply": "14801817.163707504",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "fullnode.mainnet.aptoslabs.com",
+     "as_of": "ledger version 8175419952",
+     "supply": "14801817.163707504"
+    },
+    {
+     "provider": "aptos-rest.publicnode.com",
+     "as_of": "ledger version 8175419984",
+     "supply": "14801817.163707504"
+    }
+   ]
+  },
+  {
+   "chain": "solana",
+   "class": "BENJI",
+   "address": "5Tu84fKBpe9vfXeotjvfvWdWbAjy3hqsExvuHgFqFxA1",
+   "supply": "511981.564067276",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "api.mainnet-beta.solana.com",
+     "as_of": "finalized slot 472692264",
+     "supply": "511981.564067276"
+    },
+    {
+     "provider": "solana-mainnet.gateway.tatum.io",
+     "as_of": "finalized slot 472692269",
+     "supply": "511981.564067276"
+    }
+   ]
+  }
+ ]
+}
