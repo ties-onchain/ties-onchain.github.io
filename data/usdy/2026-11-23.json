@@ -1,0 +1,229 @@
+{
+ "fund": "USDY",
+ "taken": "2026-11-23T21:30Z",
+ "rows": [
+  {
+   "chain": "ethereum",
+   "class": "USDY",
+   "address": "0x96F6eF951840721AdBF46Ac996b59E0235CB985C",
+   "supply": "1100348101.448208369046130085",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "ethereum-rpc.publicnode.com",
+     "as_of": "finalized block 26480469",
+     "supply": "1100348101.448208369046130085"
+    },
+    {
+     "provider": "eth.drpc.org",
+     "as_of": "finalized block 26480469",
+     "supply": "1100348101.448208369046130085"
+    }
+   ]
+  },
+  {
+   "chain": "stellar",
+   "class": "USDY",
+   "address": "USDY-GAJMPX5NBOG6TQFPQGRABJEEB2YE7RFRLUKJDZAZGAD5GFX4J7TADAZ6",
+   "supply": "462862764.8168020",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "horizon.stellar.org",
+     "as_of": "ledger 65636685",
+     "supply": "462862764.8168020"
+    },
+    {
+     "provider": "horizon.stellar.lobstr.co",
+     "as_of": "ledger 65636685",
+     "supply": "462862764.8168020"
+    }
+   ]
+  },
+  {
+   "chain": "bsc",
+   "class": "USDY",
+   "address": "0x608593d17A2decBbc4399e4185bE4922F97eD32E",
+   "supply": "240689571.239936214322168865",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "bsc-dataseed.bnbchain.org",
+     "as_of": "finalized block 135343337",
+     "supply": "240689571.239936214322168865"
+    },
+    {
+     "provider": "bsc-dataseed1.defibit.io",
+     "as_of": "finalized block 135343339",
+     "supply": "240689571.239936214322168865"
+    }
+   ]
+  },
+  {
+   "chain": "sei",
+   "class": "USDY",
+   "address": "0x54cD901491AeF397084453F4372B93c33260e2A6",
+   "supply": "225744310.740312215360000000",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "evm-rpc.sei-apis.com",
+     "as_of": "finalized block 244994581",
+     "supply": "225744310.740312215360000000"
+    },
+    {
+     "provider": "sei-evm-rpc.publicnode.com",
+     "as_of": "finalized block 244994582",
+     "supply": "225744310.740312215360000000"
+    }
+   ]
+  },
+  {
+   "chain": "sui",
+   "class": "USDY",
+   "address": "0x960b531667636f39e85867775f52f6b1f220a058c4de786905bdf761e06a56bb::usdy::USDY",
+   "supply": "10813796.987991",
+   "status": "single provider",
+   "reads": [
+    {
+     "provider": "graphql.mainnet.sui.io",
+     "as_of": "checkpoint 348479893",
+     "supply": "10813796.987991"
+    }
+   ]
+  },
+  {
+   "chain": "solana",
+   "class": "USDY",
+   "address": "A1KLoBrKBde8Ty9qtNQUtq3C2ortoC3u7twggz7sEto6",
+   "supply": "6813320.794289",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "api.mainnet-beta.solana.com",
+     "as_of": "finalized slot 473094146",
+     "supply": "6813320.794289"
+    },
+    {
+     "provider": "solana-mainnet.gateway.tatum.io",
+     "as_of": "finalized slot 473094172",
+     "supply": "6813320.794289"
+    }
+   ]
+  },
+  {
+   "chain": "arbitrum",
+   "class": "USDY",
+   "address": "0x35e050d3C0eC2d29D269a8EcEa763a183bDF9A9D",
+   "supply": "2728691.303489215484050328",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "arb1.arbitrum.io",
+     "as_of": "finalized block 526923713",
+     "supply": "2728691.303489215484050328"
+    },
+    {
+     "provider": "arbitrum-one.public.blastapi.io",
+     "as_of": "finalized block 526923713",
+     "supply": "2728691.303489215484050328"
+    }
+   ]
+  },
+  {
+   "chain": "tempo",
+   "class": "USDY",
+   "address": "0x20c000000000000000000000D479B9f6eC0ceFf9",
+   "supply": "697809.916430",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "rpc.tempo.xyz",
+     "as_of": "finalized block 50489589",
+     "supply": "697809.916430"
+    },
+    {
+     "provider": "tempo.drpc.org",
+     "as_of": "finalized block 50489590",
+     "supply": "697809.916430"
+    }
+   ]
+  },
+  {
+   "chain": "mantle",
+   "class": "USDY",
+   "address": "0x5bE26527e817998A7206475496fDE1E68957c5A6",
+   "supply": "317337.484996694753844865",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "rpc.mantle.xyz",
+     "as_of": "finalized block 103668799",
+     "supply": "317337.484996694753844865"
+    },
+    {
+     "provider": "mantle.drpc.org",
+     "as_of": "finalized block 103668799",
+     "supply": "317337.484996694753844865"
+    }
+   ]
+  },
+  {
+   "chain": "noble",
+   "class": "USDY",
+   "address": "ausdy",
+   "supply": "62531.369928814821270000",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "rest.cosmos.directory",
+     "as_of": "latest block",
+     "supply": "62531.369928814821270000"
+    },
+    {
+     "provider": "api.noble.xyz",
+     "as_of": "latest block",
+     "supply": "62531.369928814821270000"
+    }
+   ]
+  },
+  {
+   "chain": "aptos",
+   "class": "USDY",
+   "address": "0xcfea864b32833f157f042618bd845145256b1bf4c0da34a7013b76e42daa53cc::usdy::USDY",
+   "supply": "1683.253542",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "fullnode.mainnet.aptoslabs.com",
+     "as_of": "ledger version 8192142995",
+     "supply": "1683.253542"
+    },
+    {
+     "provider": "aptos-rest.publicnode.com",
+     "as_of": "ledger version 8192143188",
+     "supply": "1683.253542"
+    }
+   ]
+  },
+  {
+   "chain": "plume",
+   "class": "USDY",
+   "address": "0xD2B65e851Be3d80D3c2ce795eB2E78f16cB088b2",
+   "supply": "0E-18",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "rpc.plume.org",
+     "as_of": "finalized block 107742502",
+     "supply": "0E-18"
+    },
+    {
+     "provider": "plume.drpc.org",
+     "as_of": "finalized block 107742502",
+     "supply": "0E-18"
+    }
+   ]
+  }
+ ]
+}
