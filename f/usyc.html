@@ -99,6 +99,55 @@ html { scroll-padding-top: 4.5rem; }
 .others-nav a { text-decoration: none; font-size: 0.875rem; padding: 0.3rem 0.7rem; border: 1px solid var(--rule); border-radius: 999px; transition: border-color 150ms ease; }
 .others-nav a[aria-current] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 @media (hover: hover) and (pointer: fine) { .others-nav a:hover { border-color: var(--fg-2); } }
+.exceptions, .moves { display: grid; gap: 0.75rem; min-width: 0; }
+.exc-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.exc { display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); gap: 0.375rem 1.25rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+.exc p { margin: 0; }
+.exc-head { font-weight: 600; text-wrap: pretty; }
+.exc-head a { text-decoration-color: var(--rule); }
+.exc-body { color: var(--fg-2); font-size: 0.9375rem; max-width: 72ch; text-wrap: pretty; }
+.exc-body, .reconciled { font-variant-numeric: tabular-nums; }
+.reconciled { display: flex; gap: 0.5rem; align-items: start; margin: 0.25rem 0 0; color: var(--ok); font-size: 0.9375rem; font-weight: 500; }
+.reconciled .ico { margin-top: 0.2rem; }
+.fund .exc-list { border-top: 0; }
+.movt { min-width: 40rem; }
+.movt .k-redemption { color: var(--fg); }
+.alerts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem 3rem; align-items: center;
+  border: 1px solid var(--rule); border-radius: 12px; padding: 2rem; background: var(--wash); }
+.a-copy { display: grid; gap: 0.75rem; }
+.a-copy h2 { font-size: 1.5rem; letter-spacing: -0.025em; }
+.a-copy p { margin: 0; color: var(--fg-2); max-width: 52ch; text-wrap: pretty; }
+.cta { display: inline-block; margin-top: 0.25rem; padding: 0.625rem 1rem; border-radius: 8px; background: var(--fg); color: var(--bg);
+  text-decoration: none; font-weight: 600; font-size: 0.9375rem; transition: transform 160ms var(--ease-out); }
+.cta:active { transform: scale(0.97); }
+.alert-card { margin: 0; background: var(--bg); border: 1px solid var(--rule); border-left: 3px solid var(--warn); border-radius: 8px; padding: 1.125rem 1.25rem;
+  display: grid; gap: 0.5rem; box-shadow: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 24px oklch(0 0 0 / 0.06); }
+.alert-card p { margin: 0; }
+.a-meta { display: flex; justify-content: space-between; gap: 1rem; font: 500 0.75rem var(--mono); color: var(--fg-2); }
+.a-head { font-weight: 600; }
+.a-body { font-size: 0.875rem; color: var(--fg-2); font-variant-numeric: tabular-nums; }
+.a-link { font: 400 0.75rem var(--mono); color: var(--fg-2); }
+.hist { display: grid; gap: 0.5rem; }
+.hist-k { margin: 0; font-size: 0.8125rem; color: var(--fg-2); font-weight: 500; }
+.hist-plot { position: relative; height: 11rem; padding: 0 3.5rem 0 0; cursor: crosshair; outline-offset: 4px; touch-action: pan-y; }
+.hist-plot svg { width: calc(100% - 3.5rem); height: 100%; display: block; overflow: visible; position: absolute; inset: 0 3.5rem 0 0; }
+.h-base { stroke: var(--rule); stroke-width: 1; }
+.h-area { fill: var(--wash); }
+.h-line { fill: none; stroke: var(--fg); stroke-width: 2; stroke-linejoin: round; }
+.h-cross { stroke: var(--fg-2); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; }
+.hist-plot.on .h-cross { opacity: 1; }
+.h-dot { position: absolute; width: 0.625rem; height: 0.625rem; margin: -0.3125rem; border-radius: 50%; background: var(--fg); box-shadow: 0 0 0 2px var(--bg); pointer-events: none; }
+.hist-plot .h-dot { left: 0; }
+.h-tip { position: absolute; top: 0; transform: translateX(0.75rem); display: none; grid-template-columns: auto auto; gap: 0.125rem 1rem;
+  background: var(--fg); color: var(--bg); padding: 0.5rem 0.75rem; border-radius: 6px; font: 400 0.75rem/1.4 var(--mono); white-space: nowrap; pointer-events: none; z-index: 2; }
+.hist-plot.on .h-tip { display: grid; }
+.h-tip.flip { transform: translateX(calc(-100% - 0.75rem)); }
+.h-tip b { grid-column: 1; font-weight: 600; }
+.h-tip .tt { grid-column: 2; text-align: right; font-weight: 600; }
+.h-tip span:nth-child(odd):not(.tt) { opacity: 0.75; }
+.h-x, .h-y { position: absolute; font: 400 0.75rem var(--mono); color: var(--fg-2); }
+.h-x { bottom: 0; } .h-x0 { left: 0; } .h-x1 { right: 3.5rem; }
+.h-y { right: 0; } .h-y1 { top: 0.25rem; } .h-y0 { bottom: 1.25rem; }
 .changes > p.quiet { margin: 0; font-size: 0.9375rem; }
 .changes .quiet a, .mv-name a { color: inherit; }
 .late { margin: 0; padding: 0.75rem 1rem; border-radius: 8px; background: var(--wash); color: var(--warn); font-weight: 500; }
@@ -214,6 +263,8 @@ footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--ru
   display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between; }
 
 @media (max-width: 48rem) {
+  .exc { grid-template-columns: 1fr; }
+  .alerts { grid-template-columns: 1fr; padding: 1.25rem; }
   .stamp { margin-left: 0; width: 100%; font-size: 0.75rem; }
   .reg { min-width: 0; }
   .reg thead { display: none; }
@@ -272,7 +323,8 @@ footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--ru
       <p class="delta">+55,983.27 since 2026-11-22</p>
     </div>
   </header>
-  <div class="checks"><div class="check ok"><p class="ck">Two independent nodes</p><p class="cv"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>5 of 5 contracts agree</p><p class="cn">to the cent, at finalized state</p></div><div class="check ok"><p class="ck">CoinGecko</p><p class="cv"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>matches</p><p class="cn">total supply, against the chains</p></div><div class="check quiet"><p class="ck">Official record</p><p class="cv">none daily</p><p class="cn">no public daily filing to reconcile against</p></div></div>
+  <div class="checks"><div class="check ok"><p class="ck">Two independent nodes</p><p class="cv"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>5 of 5 contracts agree</p><p class="cn">same figure to the cent, each at its own latest finalized block</p></div><div class="check ok"><p class="ck">CoinGecko</p><p class="cv"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>matches</p><p class="cn">total supply, against the chains</p></div><div class="check quiet"><p class="ck">Official record</p><p class="cv">none daily</p><p class="cn">no public daily filing to reconcile against</p></div></div>
+  
   <div class="where"><p class="where-k">Where it lives</p><div class="where-bar" role="img" aria-label="Share of the fund by chain: BNB Chain 98%, Ethereum 2%, Solana 0%, Noble 0%, NEAR 0%"><i style="--w:0.98359;--k:100%" title="BNB Chain USYC: 98.4%"></i><i style="--w:0.01641;--k:76%" title="Ethereum USYC: 1.6%"></i><i style="--w:0.00000;--k:60%" title="Solana USYC: 0.0%"></i><i style="--w:0.00000;--k:48%" title="Noble USYC: 0.0%"></i><i style="--w:0.00000;--k:39%" title="NEAR USYC: 0.0%"></i></div><ul class="where-legend"><li><b style="--k:100%"></b>BNB Chain USYC <span class="num">98%</span></li><li class="quiet">+4 under 2%</li></ul></div>
   
   <div class="recon"><h3>Same fund, other public numbers</h3><div class="scroll"><table class="ledger others"><thead><tr><th scope="col">Source</th><th scope="col" class="num">Tokens</th><th scope="col" class="num">Against the chains</th></tr></thead><tbody><tr class=""><th scope="row">CoinGecko, circulating supply</th><td class="num">1,761,980,176.66</td><td class="num">matches</td></tr><tr class=""><th scope="row">CoinGecko, total supply</th><td class="num">1,761,980,176.66</td><td class="num">matches</td></tr></tbody></table></div><p class="note">Data from <a href="https://www.coingecko.com/en/coins/hashnote-usyc">CoinGecko</a>. Read 2026-11-23 21:30 UTC. The chains add up to <span class="num">1,760,831,158.04</span> tokens. A gap means the counts differ, not which one is right: each chain below shows its own read.</p></div>
@@ -288,6 +340,25 @@ footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--ru
   <p class="note">How each chain is read and what "confirmed" means: <a href="../method.html">method</a>.</p>
   <footer><span>Independent. Not affiliated with any issuer. By Stephane T., Luxembourg.</span><span><a href="mailto:hello@tiesonchain.com">Email</a> · <a href="https://x.com/tiesonchain">X</a> · <a href="https://bsky.app/profile/tiesonchain.bsky.social">Bluesky</a> · <a href="../feed.xml">RSS</a> · <a href="../data/index.json">Daily archive</a> · <a href="../data/latest.json">Latest (JSON)</a> · <a href="https://github.com/ties-onchain/ties-model">Code</a></span></footer>
 </main>
+<script>
+document.querySelectorAll(".hist").forEach(h => {  // crosshair + tooltip: nearest nightly read to the pointer
+  const pts = JSON.parse(h.dataset.points), plot = h.querySelector(".hist-plot"), svg = plot.querySelector("svg");
+  const vb = svg.viewBox.baseVal, cross = plot.querySelector(".h-cross"), dot = plot.querySelector(".h-dot"), tip = plot.querySelector(".h-tip");
+  const place = p => { dot.style.left = `calc((100% - 3.5rem) * ${p.cx / vb.width})`; dot.style.top = p.cy / vb.height * 100 + "%"; };
+  const show = i => {
+    const p = pts[i], f = p.cx / vb.width;
+    cross.setAttribute("x1", p.cx); cross.setAttribute("x2", p.cx); plot.classList.add("on"); place(p);
+    tip.innerHTML = `<b>${p.d}</b><span class="tt">${p.t}${p.x ? "" : " (incomplete)"}</span>` + p.p.map(([c, v]) => `<span>${c}</span><span>${v}</span>`).join("");
+    tip.style.left = `calc((100% - 3.5rem) * ${f})`;
+    tip.classList.toggle("flip", f > 0.55);  // keep the tooltip beside the crosshair, on the side with room
+  };
+  const at = e => { const r = svg.getBoundingClientRect(); return Math.round((e.clientX - r.left) / r.width * (pts.length - 1)); };
+  plot.addEventListener("pointermove", e => show(Math.max(0, Math.min(pts.length - 1, at(e)))));
+  plot.addEventListener("pointerleave", () => { plot.classList.remove("on"); place(pts[pts.length - 1]); });
+  plot.tabIndex = 0; let k = pts.length - 1;
+  plot.addEventListener("keydown", e => { if (e.key === "ArrowLeft" || e.key === "ArrowRight") { k = Math.max(0, Math.min(pts.length - 1, k + (e.key === "ArrowLeft" ? -1 : 1))); show(k); e.preventDefault(); } });
+});
+</script>
 <script>
 (() => {
   const LATE_HOURS = 26;

@@ -99,6 +99,55 @@ html { scroll-padding-top: 4.5rem; }
 .others-nav a { text-decoration: none; font-size: 0.875rem; padding: 0.3rem 0.7rem; border: 1px solid var(--rule); border-radius: 999px; transition: border-color 150ms ease; }
 .others-nav a[aria-current] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 @media (hover: hover) and (pointer: fine) { .others-nav a:hover { border-color: var(--fg-2); } }
+.exceptions, .moves { display: grid; gap: 0.75rem; min-width: 0; }
+.exc-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.exc { display: grid; grid-template-columns: 10.5rem minmax(0, 1fr); gap: 0.375rem 1.25rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+.exc p { margin: 0; }
+.exc-head { font-weight: 600; text-wrap: pretty; }
+.exc-head a { text-decoration-color: var(--rule); }
+.exc-body { color: var(--fg-2); font-size: 0.9375rem; max-width: 72ch; text-wrap: pretty; }
+.exc-body, .reconciled { font-variant-numeric: tabular-nums; }
+.reconciled { display: flex; gap: 0.5rem; align-items: start; margin: 0.25rem 0 0; color: var(--ok); font-size: 0.9375rem; font-weight: 500; }
+.reconciled .ico { margin-top: 0.2rem; }
+.fund .exc-list { border-top: 0; }
+.movt { min-width: 40rem; }
+.movt .k-redemption { color: var(--fg); }
+.alerts { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2rem 3rem; align-items: center;
+  border: 1px solid var(--rule); border-radius: 12px; padding: 2rem; background: var(--wash); }
+.a-copy { display: grid; gap: 0.75rem; }
+.a-copy h2 { font-size: 1.5rem; letter-spacing: -0.025em; }
+.a-copy p { margin: 0; color: var(--fg-2); max-width: 52ch; text-wrap: pretty; }
+.cta { display: inline-block; margin-top: 0.25rem; padding: 0.625rem 1rem; border-radius: 8px; background: var(--fg); color: var(--bg);
+  text-decoration: none; font-weight: 600; font-size: 0.9375rem; transition: transform 160ms var(--ease-out); }
+.cta:active { transform: scale(0.97); }
+.alert-card { margin: 0; background: var(--bg); border: 1px solid var(--rule); border-left: 3px solid var(--warn); border-radius: 8px; padding: 1.125rem 1.25rem;
+  display: grid; gap: 0.5rem; box-shadow: 0 1px 2px oklch(0 0 0 / 0.04), 0 8px 24px oklch(0 0 0 / 0.06); }
+.alert-card p { margin: 0; }
+.a-meta { display: flex; justify-content: space-between; gap: 1rem; font: 500 0.75rem var(--mono); color: var(--fg-2); }
+.a-head { font-weight: 600; }
+.a-body { font-size: 0.875rem; color: var(--fg-2); font-variant-numeric: tabular-nums; }
+.a-link { font: 400 0.75rem var(--mono); color: var(--fg-2); }
+.hist { display: grid; gap: 0.5rem; }
+.hist-k { margin: 0; font-size: 0.8125rem; color: var(--fg-2); font-weight: 500; }
+.hist-plot { position: relative; height: 11rem; padding: 0 3.5rem 0 0; cursor: crosshair; outline-offset: 4px; touch-action: pan-y; }
+.hist-plot svg { width: calc(100% - 3.5rem); height: 100%; display: block; overflow: visible; position: absolute; inset: 0 3.5rem 0 0; }
+.h-base { stroke: var(--rule); stroke-width: 1; }
+.h-area { fill: var(--wash); }
+.h-line { fill: none; stroke: var(--fg); stroke-width: 2; stroke-linejoin: round; }
+.h-cross { stroke: var(--fg-2); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; }
+.hist-plot.on .h-cross { opacity: 1; }
+.h-dot { position: absolute; width: 0.625rem; height: 0.625rem; margin: -0.3125rem; border-radius: 50%; background: var(--fg); box-shadow: 0 0 0 2px var(--bg); pointer-events: none; }
+.hist-plot .h-dot { left: 0; }
+.h-tip { position: absolute; top: 0; transform: translateX(0.75rem); display: none; grid-template-columns: auto auto; gap: 0.125rem 1rem;
+  background: var(--fg); color: var(--bg); padding: 0.5rem 0.75rem; border-radius: 6px; font: 400 0.75rem/1.4 var(--mono); white-space: nowrap; pointer-events: none; z-index: 2; }
+.hist-plot.on .h-tip { display: grid; }
+.h-tip.flip { transform: translateX(calc(-100% - 0.75rem)); }
+.h-tip b { grid-column: 1; font-weight: 600; }
+.h-tip .tt { grid-column: 2; text-align: right; font-weight: 600; }
+.h-tip span:nth-child(odd):not(.tt) { opacity: 0.75; }
+.h-x, .h-y { position: absolute; font: 400 0.75rem var(--mono); color: var(--fg-2); }
+.h-x { bottom: 0; } .h-x0 { left: 0; } .h-x1 { right: 3.5rem; }
+.h-y { right: 0; } .h-y1 { top: 0.25rem; } .h-y0 { bottom: 1.25rem; }
 .changes > p.quiet { margin: 0; font-size: 0.9375rem; }
 .changes .quiet a, .mv-name a { color: inherit; }
 .late { margin: 0; padding: 0.75rem 1rem; border-radius: 8px; background: var(--wash); color: var(--warn); font-weight: 500; }
@@ -214,6 +263,8 @@ footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--ru
   display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between; }
 
 @media (max-width: 48rem) {
+  .exc { grid-template-columns: 1fr; }
+  .alerts { grid-template-columns: 1fr; padding: 1.25rem; }
   .stamp { margin-left: 0; width: 100%; font-size: 0.75rem; }
   .reg { min-width: 0; }
   .reg thead { display: none; }
@@ -270,10 +321,15 @@ footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--ru
       <dt>Sui, Noble, NEAR</dt><dd>Coin supply, bank supply and ft_total_supply(), at the latest final state.</dd>
       <dt>XRP Ledger</dt><dd>The issuer's obligations (everything held on trustlines) at a validated ledger.</dd>
     </dl>
-    <p>A contract counts as confirmed only when two independent providers return the same figure to the cent. Anything else is shown as it is, never smoothed over. Contract addresses come from public token lists and are checked against the name each contract reports on-chain.</p>
+    <p>A contract counts as confirmed only when two independent providers return the same figure to the cent. Each provider reads its own latest finalized block, so the two reads can be a few blocks apart; a supply change between them shows up as a disagreement, never as a silent average. Anything else is shown as it is, never smoothed over. Contract addresses come from public token lists and are checked against the name each contract reports on-chain.</p>
     <p>CoinGecko's figure is shown next to the chains as "matches" when it is within 0.1% of them. When it is not, ties looks for the one set of chains that adds up to it to the hundredth of a token and names the chains left out. A gap means the counts differ, not which one is right.</p>
     <p>Where a fund files its shares outstanding with the SEC, ties compares them with the tokens on-chain at the same month-end. Dates before ties started reading are rebuilt from chain history.</p>
     <p>Every daily read is archived at a permanent address (data/&lt;fund&gt;/&lt;day&gt;.json) with each provider's figure and the block or ledger it was read at, so a number can be cited and checked later. Every change to an already published figure is listed with its date in <a href="data/changes.json">changes.json</a>.</p>
+    <h2>What ties does not prove</h2>
+    <p>ties counts tokens. A token count is not the fund's NAV, its assets, its solvency or its capacity to redeem: those can be attached downstream, from the issuer's own reports, but ties does not check them.</p>
+    <p>Adding chains up assumes each chain's tokens are separate shares, moved between chains by burning on one and minting on the other. A bridge that locks tokens on one chain and mints copies on another would be counted twice. Mint and burn closure catches neither case on its own; ties does not yet test this for every fund, and says so here until it does.</p>
+    <p>Two nodes agreeing rules out one node being wrong or down, not a contract that is itself wrong. Contract addresses are taken from public lists and the issuer's documents and checked against each contract's on-chain name.</p>
+    <p>Month-ends before ties started reading are rebuilt from chain history and marked approximate. The rebuilt figures and how each was made: <a href="data/rebuilt.json">rebuilt.json</a>.</p>
     <h2>Independence</h2>
     <p>ties is not affiliated with BlackRock, Franklin Templeton, Spiko, Ondo, Circle, Janus Henderson or any issuer named here. No fund or issuer pays for it today; if that ever changes, it will say so on this page. It has no token. It is read-only public data, not investment advice.</p>
   </section>
