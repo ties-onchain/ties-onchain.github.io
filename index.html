@@ -36,6 +36,12 @@ a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 0
 @media (hover: hover) and (pointer: fine) { a:hover { text-decoration-color: currentColor; } }
 :focus-visible { outline: 2px solid var(--ok); outline-offset: 3px; border-radius: 2px; }
 
+.tabs { position: sticky; top: 0; z-index: 2; background: var(--bg); display: flex; gap: 0.25rem 1.1rem; overflow-x: auto; white-space: nowrap;
+  padding: 0.6rem 0; margin: 0 0 1.25rem; border-bottom: 1px solid var(--rule); font-size: 0.875rem; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs a { color: var(--fg-2); text-decoration: none; padding: 0.15rem 0; }
+@media (hover: hover) and (pointer: fine) { .tabs a:hover { color: var(--fg); } }
+html { scroll-padding-top: 3.25rem; }
 .top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 1.5rem;
   border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
 .mark { font-weight: 700; font-size: 1.375rem; letter-spacing: -0.03em; margin: 0; }
@@ -190,6 +196,7 @@ footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--ru
     <p class="mark"><i class="logo" aria-hidden="true"></i>ties<span>tokenized fund supply, read on-chain</span></p>
     <p class="stamp">Read nightly. Last read <time datetime="2026-11-23T21:30:00+00:00" data-read="2026-11-23T21:30:00+00:00">23 Nov 2026, 21:30 UTC</time></p>
   </header>
+  <nav class="tabs" aria-label="Sections"><a href="#findings-h">Findings</a><a href="#buidl">BUIDL</a><a href="#benji">BENJI</a><a href="#eutbl">EUTBL</a><a href="#usdy">USDY</a><a href="#usyc">USYC</a><a href="#ousg">OUSG</a><a href="#jtrsy">JTRSY</a><a href="e/benji/flows.html">BENJI daily flows</a><a href="#method-h">How it's read</a></nav>
   <section class="intro" aria-labelledby="q">
     <h1 id="q">How many fund tokens exist right now?</h1>
     <p class="lede">Tokenized money market funds and Treasury products live on many chains at once. ties reads each contract every night, from two independent providers, at finalized state, and adds it up. Token counts only: no prices, no NAV.</p>
@@ -422,7 +429,7 @@ footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--ru
     </dl>
     <p>A contract counts as confirmed only when two independent providers return the same figure to the cent. Anything else is shown as it is, never smoothed over. Contract addresses come from public token lists and are checked against the name each contract reports on-chain.</p>
     <p>Every daily read is archived at a permanent address (data/&lt;fund&gt;/&lt;day&gt;.json) with each provider's figure and the block or ledger it was read at, so a number can be cited and checked later.</p>
-    <p>ties is independent and not affiliated with BlackRock, Franklin Templeton, Spiko, Ondo, Circle, Janus Henderson or any issuer named here. It has no token, sells nothing and is paid by no one it covers. It is read-only public data, not investment advice.</p>
+    <p>ties is not affiliated with BlackRock, Franklin Templeton, Spiko, Ondo, Circle, Janus Henderson or any issuer named here. No fund or issuer pays for it today; if that ever changes, it will say so on this page. It has no token. It is read-only public data, not investment advice.</p>
   </section>
   <footer><span>By Stephane T., Luxembourg.</span><span><a href="mailto:hello@tiesonchain.com">Email</a> · <a href="https://x.com/tiesonchain">X</a> · <a href="https://bsky.app/profile/tiesonchain.bsky.social">Bluesky</a> · <a href="feed.xml">RSS</a> · <a href="data/index.json">Daily archive</a> · <a href="data/latest.json">Latest (JSON)</a></span></footer>
 </main>

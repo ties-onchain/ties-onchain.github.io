@@ -36,6 +36,12 @@ a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 0
 @media (hover: hover) and (pointer: fine) { a:hover { text-decoration-color: currentColor; } }
 :focus-visible { outline: 2px solid var(--ok); outline-offset: 3px; border-radius: 2px; }
 
+.tabs { position: sticky; top: 0; z-index: 2; background: var(--bg); display: flex; gap: 0.25rem 1.1rem; overflow-x: auto; white-space: nowrap;
+  padding: 0.6rem 0; margin: 0 0 1.25rem; border-bottom: 1px solid var(--rule); font-size: 0.875rem; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs a { color: var(--fg-2); text-decoration: none; padding: 0.15rem 0; }
+@media (hover: hover) and (pointer: fine) { .tabs a:hover { color: var(--fg); } }
+html { scroll-padding-top: 3.25rem; }
 .top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 1.5rem;
   border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
 .mark { font-weight: 700; font-size: 1.375rem; letter-spacing: -0.03em; margin: 0; }
@@ -202,6 +208,7 @@ tr:target { background: var(--wash); box-shadow: inset 3px 0 0 var(--ok); }
 <main class="page">
   <header class="top">
     <p class="mark"><a href="../../"><i class="logo" aria-hidden="true"></i>ties</a><span>tokenized fund supply, read on-chain</span></p>
+    <p class="days"><a href="../../#benji">← Franklin BENJI</a></p>
   </header>
   <section class="intro" aria-labelledby="q">
     <h1 id="q">Franklin BENJI: daily flows, rebuilt from the chains</h1>
