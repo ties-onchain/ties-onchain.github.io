@@ -70,7 +70,11 @@ html { scroll-padding-top: 4.5rem; }
 .reg thead th { font-size: 0.75rem; text-transform: none; white-space: nowrap; }
 .reg tbody tr { position: relative; }
 .reg th[scope="row"] { font-weight: 600; }
-.fund-link { text-decoration: none; }
+.fund-link { text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 0.2em; }
+.go { display: inline-block; margin-left: 0.4em; color: var(--fg-2); transition: transform 160ms ease-out; }  /* says "opens", on touch too */
+@media (hover: hover) and (pointer: fine) { .reg tbody tr { cursor: pointer; } .reg tbody tr:hover .fund-link { text-decoration-color: currentColor; } .reg tbody tr:hover .go { transform: translateX(3px); color: var(--fg); } }
+@media (prefers-reduced-motion: reduce) { .go { transition: none; } }
+.alt { display: block; font: 400 0.75rem var(--sans); color: var(--warn); margin-top: 0.15rem; white-space: nowrap; }
 .fund-link::after { content: ""; position: absolute; inset: 0; }  /* the whole row opens the fund */
 .issuer { display: block; font-weight: 400; font-size: 0.8125rem; color: var(--fg-2); max-width: 22ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .reg td.tok { font: 500 1rem var(--mono); letter-spacing: -0.02em; }
@@ -270,7 +274,8 @@ footer { color: var(--fg-2); font-size: 0.875rem; border-top: 1px solid var(--ru
   .reg { min-width: 0; }
   .reg thead { display: none; }
   .reg tbody tr { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.625rem 0.375rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
-  .reg tbody th { flex: 1 1 auto; min-width: 0; }
+  .reg tbody th { flex: 1 1 0; min-width: 0; }
+  .reg td.tok { text-align: right; }
   .reg tbody th, .reg tbody td { padding: 0; border: 0; }
   .reg td.where-c { flex: 1 0 100%; display: flex; align-items: center; gap: 0.75rem; }
   .reg .where-c .n { margin: 0; }
