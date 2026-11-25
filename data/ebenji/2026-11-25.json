@@ -1,23 +1,23 @@
 {
  "fund": "EBENJI",
- "taken": "2026-11-25T05:05Z",
+ "taken": "2026-11-25T21:30Z",
  "rows": [
   {
    "chain": "stellar",
    "class": "eBENJI",
    "address": "eBENJI-GAVR3ZZLHUZQ4LYHFTCDV22CANZNMSQPSZISQXCWADAZPKTHMEPS2BFC",
-   "supply": "40005045.3590662",
+   "supply": "40007793.3056319",
    "status": "ok",
    "reads": [
     {
      "provider": "horizon.stellar.org",
-     "as_of": "ledger 65659413",
-     "supply": "40005045.3590662"
+     "as_of": "ledger 65671266",
+     "supply": "40007793.3056319"
     },
     {
      "provider": "horizon.stellar.lobstr.co",
-     "as_of": "ledger 65659413",
-     "supply": "40005045.3590662"
+     "as_of": "ledger 65671267",
+     "supply": "40007793.3056319"
     }
    ]
   },
@@ -25,18 +25,18 @@
    "chain": "stellar",
    "class": "erBENJI",
    "address": "erBENJI-GDIMV4BQ5YJAG3L3ITUWZUSPCI44Q4KDMKFCKH4ZX652ZJU2DLH7KR74",
-   "supply": "10001.2400384",
+   "supply": "10001.9100215",
    "status": "ok",
    "reads": [
     {
      "provider": "horizon.stellar.org",
-     "as_of": "ledger 65659414",
-     "supply": "10001.2400384"
+     "as_of": "ledger 65671267",
+     "supply": "10001.9100215"
     },
     {
      "provider": "horizon.stellar.lobstr.co",
-     "as_of": "ledger 65659414",
-     "supply": "10001.2400384"
+     "as_of": "ledger 65671267",
+     "supply": "10001.9100215"
     }
    ]
   }
