@@ -207,6 +207,33 @@
    }
   ]
  },
+ "EBENJI": {
+  "taken": "2026-11-25T05:05Z",
+  "rows": [
+   {
+    "chain": "stellar",
+    "class": "eBENJI",
+    "address": "eBENJI-GAVR3ZZLHUZQ4LYHFTCDV22CANZNMSQPSZISQXCWADAZPKTHMEPS2BFC",
+    "supply": "40005045.3590662",
+    "status": "ok",
+    "as_of": [
+     "ledger 65659413",
+     "ledger 65659413"
+    ]
+   },
+   {
+    "chain": "stellar",
+    "class": "erBENJI",
+    "address": "erBENJI-GDIMV4BQ5YJAG3L3ITUWZUSPCI44Q4KDMKFCKH4ZX652ZJU2DLH7KR74",
+    "supply": "10001.2400384",
+    "status": "ok",
+    "as_of": [
+     "ledger 65659414",
+     "ledger 65659414"
+    ]
+   }
+  ]
+ },
  "EUTBL": {
   "taken": "2026-11-24T21:30Z",
   "rows": [
