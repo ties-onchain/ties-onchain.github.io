@@ -21,7 +21,8 @@
   "data/benji/2026-11-22.json",
   "data/benji/2026-11-23.json",
   "data/benji/2026-11-24.json",
-  "data/benji/2026-11-25.json"
+  "data/benji/2026-11-25.json",
+  "data/benji/2026-11-26.json"
  ],
  "BUIDL": [
   "data/buidl/2026-11-04.json",
@@ -45,10 +46,12 @@
   "data/buidl/2026-11-22.json",
   "data/buidl/2026-11-23.json",
   "data/buidl/2026-11-24.json",
-  "data/buidl/2026-11-25.json"
+  "data/buidl/2026-11-25.json",
+  "data/buidl/2026-11-26.json"
  ],
  "EBENJI": [
-  "data/ebenji/2026-11-25.json"
+  "data/ebenji/2026-11-25.json",
+  "data/ebenji/2026-11-26.json"
  ],
  "EUTBL": [
   "data/eutbl/2026-11-10.json",
@@ -66,11 +69,13 @@
   "data/eutbl/2026-11-22.json",
   "data/eutbl/2026-11-23.json",
   "data/eutbl/2026-11-24.json",
-  "data/eutbl/2026-11-25.json"
+  "data/eutbl/2026-11-25.json",
+  "data/eutbl/2026-11-26.json"
  ],
  "GBENJI": [
   "data/gbenji/2026-11-24.json",
-  "data/gbenji/2026-11-25.json"
+  "data/gbenji/2026-11-25.json",
+  "data/gbenji/2026-11-26.json"
  ],
  "JTRSY": [
   "data/jtrsy/2026-11-20.json",
@@ -78,7 +83,8 @@
   "data/jtrsy/2026-11-22.json",
   "data/jtrsy/2026-11-23.json",
   "data/jtrsy/2026-11-24.json",
-  "data/jtrsy/2026-11-25.json"
+  "data/jtrsy/2026-11-25.json",
+  "data/jtrsy/2026-11-26.json"
  ],
  "OUSG": [
   "data/ousg/2026-11-20.json",
@@ -86,11 +92,13 @@
   "data/ousg/2026-11-22.json",
   "data/ousg/2026-11-23.json",
   "data/ousg/2026-11-24.json",
-  "data/ousg/2026-11-25.json"
+  "data/ousg/2026-11-25.json",
+  "data/ousg/2026-11-26.json"
  ],
  "SGBENJI": [
   "data/sgbenji/2026-11-24.json",
-  "data/sgbenji/2026-11-25.json"
+  "data/sgbenji/2026-11-25.json",
+  "data/sgbenji/2026-11-26.json"
  ],
  "USDY": [
   "data/usdy/2026-11-16.json",
@@ -102,7 +110,8 @@
   "data/usdy/2026-11-22.json",
   "data/usdy/2026-11-23.json",
   "data/usdy/2026-11-24.json",
-  "data/usdy/2026-11-25.json"
+  "data/usdy/2026-11-25.json",
+  "data/usdy/2026-11-26.json"
  ],
  "USYC": [
   "data/usyc/2026-11-20.json",
@@ -110,6 +119,7 @@
   "data/usyc/2026-11-22.json",
   "data/usyc/2026-11-23.json",
   "data/usyc/2026-11-24.json",
-  "data/usyc/2026-11-25.json"
+  "data/usyc/2026-11-25.json",
+  "data/usyc/2026-11-26.json"
  ]
 }

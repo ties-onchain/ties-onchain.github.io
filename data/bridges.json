@@ -1,5 +1,5 @@
 {
- "taken": "2026-11-25T21:33Z",
+ "taken": "2026-11-26T21:32Z",
  "funds": {
   "BUIDL": {
    "checked": [
@@ -26,7 +26,7 @@
     {
      "chain": "solana",
      "holder": "2sZuHDhNnfA8AKfwdmKsc1JxQtDEbHxffbQtvUyNhPYo",
-     "balance": "56413374.9551",
+     "balance": "56415337.6611",
      "name": "",
      "matches": [
       "arbitrum",
@@ -34,7 +34,7 @@
       "tempo"
      ],
      "exact": false,
-     "gap": "49581.354900",
+     "gap": "47618.648900",
      "why": "balance equals supply on arbitrum, optimism, tempo"
     }
    ],
@@ -88,11 +88,10 @@
   "USDY": {
    "checked": [
     "ethereum",
+    "solana",
     "stellar"
    ],
-   "skipped": [
-    "solana: no Solana provider answered"
-   ],
+   "skipped": [],
    "flags": [],
    "chains": [
     "aptos",
@@ -160,6 +159,16 @@
      "exact": true,
      "gap": "0.000001000000000000",
      "why": "balance equals supply on stellar"
+    },
+    {
+     "chain": "ethereum",
+     "holder": "0x0665FDe254598e307b63f3aAe3cCd881a62d4bE3",
+     "balance": "445000.000003",
+     "name": "PoolEscrow",
+     "matches": [],
+     "exact": false,
+     "gap": null,
+     "why": "named PoolEscrow"
     }
    ],
    "chains": [

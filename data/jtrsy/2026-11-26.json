@@ -1,0 +1,191 @@
+{
+ "fund": "JTRSY",
+ "taken": "2026-11-26T21:30Z",
+ "rows": [
+  {
+   "chain": "ethereum",
+   "class": "JTRSY",
+   "address": "0x8c213ee79581ff4984583c6a801e5263418c4b86",
+   "supply": "21754266.134562",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "ethereum-rpc.publicnode.com",
+     "as_of": "finalized block 26502006",
+     "supply": "21754266.134562"
+    },
+    {
+     "provider": "eth.drpc.org",
+     "as_of": "finalized block 26502006",
+     "supply": "21754266.134562"
+    }
+   ]
+  },
+  {
+   "chain": "base",
+   "class": "JTRSY",
+   "address": "0x8c213ee79581ff4984583c6a801e5263418c4b86",
+   "supply": "3873383.453626",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "mainnet.base.org",
+     "as_of": "finalized block 62687223",
+     "supply": "3873383.453626"
+    },
+    {
+     "provider": "base.drpc.org",
+     "as_of": "finalized block 62687223",
+     "supply": "3873383.453626"
+    }
+   ]
+  },
+  {
+   "chain": "stellar",
+   "class": "JTRSY",
+   "address": "CBHOEKLWTB6HR2A3IXHIIMQG5FOXWXS6EG4Q5YJDRPMXPCX7M24CYR2O",
+   "supply": "4547091.586899000000000000",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "soroban-rpc.mainnet.stellar.gateway.fm",
+     "as_of": "ledger 65688533",
+     "supply": "4547091.586899000000000000"
+    },
+    {
+     "provider": "rpc.lightsail.network",
+     "as_of": "ledger 65688533",
+     "supply": "4547091.586899000000000000"
+    }
+   ]
+  },
+  {
+   "chain": "monad",
+   "class": "JTRSY",
+   "address": "0xc18e6f730896971a79d748e8dea61067a9bc6040",
+   "supply": "4079788.856467",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "rpc.monad.xyz",
+     "as_of": "finalized block 125683119",
+     "supply": "4079788.856467"
+    },
+    {
+     "provider": "monad-mainnet.drpc.org",
+     "as_of": "finalized block 125683119",
+     "supply": "4079788.856467"
+    }
+   ]
+  },
+  {
+   "chain": "plume",
+   "class": "JTRSY",
+   "address": "0xa5d465251fbcc907f5dd6bb2145488dfc6a2627b",
+   "supply": "496380.845102",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "rpc.plume.org",
+     "as_of": "finalized block 108397503",
+     "supply": "496380.845102"
+    },
+    {
+     "provider": "plume.drpc.org",
+     "as_of": "finalized block 108397503",
+     "supply": "496380.845102"
+    }
+   ]
+  },
+  {
+   "chain": "bsc",
+   "class": "JTRSY",
+   "address": "0xa5d465251fbcc907f5dd6bb2145488dfc6a2627b",
+   "supply": "456297.870449",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "bsc-dataseed.bnbchain.org",
+     "as_of": "finalized block 135919174",
+     "supply": "456297.870449"
+    },
+    {
+     "provider": "bsc-dataseed1.defibit.io",
+     "as_of": "finalized block 135919174",
+     "supply": "456297.870449"
+    }
+   ]
+  },
+  {
+   "chain": "arbitrum",
+   "class": "JTRSY",
+   "address": "0x8c213ee79581ff4984583c6a801e5263418c4b86",
+   "supply": "0.000000",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "arb1.arbitrum.io",
+     "as_of": "finalized block 527829662",
+     "supply": "0.000000"
+    },
+    {
+     "provider": "arb-pokt.nodies.app",
+     "as_of": "finalized block 527829662",
+     "supply": "0.000000"
+    }
+   ]
+  },
+  {
+   "chain": "avalanche",
+   "class": "JTRSY",
+   "address": "0xa5d465251fbcc907f5dd6bb2145488dfc6a2627b",
+   "supply": "1.000000",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "avalanche-c-chain-rpc.publicnode.com",
+     "as_of": "finalized block 101481177",
+     "supply": "1.000000"
+    },
+    {
+     "provider": "api.avax.network",
+     "as_of": "finalized block 101481177",
+     "supply": "1.000000"
+    }
+   ]
+  },
+  {
+   "chain": "celo",
+   "class": "JTRSY",
+   "address": "0x27e8c820d05aea8824b1ac35116f63f9833b54c8",
+   "supply": "0.000001",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "forno.celo.org",
+     "as_of": "finalized block 83826665",
+     "supply": "0.000001"
+    },
+    {
+     "provider": "celo.drpc.org",
+     "as_of": "finalized block 83826665",
+     "supply": "0.000001"
+    }
+   ]
+  },
+  {
+   "chain": "pharos",
+   "class": "JTRSY",
+   "address": "0xc18e6f730896971a79d748e8dea61067a9bc6040",
+   "supply": "1998408.731533",
+   "status": "single provider",
+   "reads": [
+    {
+     "provider": "rpc.pharos.xyz",
+     "as_of": "finalized block 24135865",
+     "supply": "1998408.731533"
+    }
+   ]
+  }
+ ]
+}

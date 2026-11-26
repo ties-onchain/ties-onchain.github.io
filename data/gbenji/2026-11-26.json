@@ -1,0 +1,44 @@
+{
+ "fund": "GBENJI",
+ "taken": "2026-11-26T21:30Z",
+ "rows": [
+  {
+   "chain": "stellar",
+   "class": "gBENJI",
+   "address": "gBENJI-GD5J73EKK5IYL5XS3FBTHHX7CZIYRP7QXDL57XFWGC2WVYWT326OBXRP",
+   "supply": "51801140.6968767",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "horizon.stellar.org",
+     "as_of": "ledger 65688537",
+     "supply": "51801140.6968767"
+    },
+    {
+     "provider": "horizon.stellar.lobstr.co",
+     "as_of": "ledger 65688538",
+     "supply": "51801140.6968767"
+    }
+   ]
+  },
+  {
+   "chain": "stellar",
+   "class": "grBENJI",
+   "address": "grBENJI-GA3ZBL3LBRKOF7CZ6MCA7JLPHWQCGYCCGKH4GVWNEDZOXW4IPXFGN2FQ",
+   "supply": "1291723.9492512",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "horizon.stellar.org",
+     "as_of": "ledger 65688538",
+     "supply": "1291723.9492512"
+    },
+    {
+     "provider": "horizon.stellar.lobstr.co",
+     "as_of": "ledger 65688538",
+     "supply": "1291723.9492512"
+    }
+   ]
+  }
+ ]
+}
