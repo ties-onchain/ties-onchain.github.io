@@ -1,0 +1,101 @@
+{
+ "fund": "USYC",
+ "taken": "2026-11-27T21:30Z",
+ "rows": [
+  {
+   "chain": "ethereum",
+   "class": "USYC",
+   "address": "0x136471a34f6ef19fE571EFFC1CA711fdb8E49f2b",
+   "supply": "28971327.554767",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "ethereum-rpc.publicnode.com",
+     "as_of": "finalized block 26509182",
+     "supply": "28971327.554767"
+    },
+    {
+     "provider": "eth.drpc.org",
+     "as_of": "finalized block 26509182",
+     "supply": "28971327.554767"
+    }
+   ]
+  },
+  {
+   "chain": "bsc",
+   "class": "USYC",
+   "address": "0x8D0fA28f221eB5735BC71d3a0Da67EE5bC821311",
+   "supply": "1862957505.002601",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "bsc-dataseed.bnbchain.org",
+     "as_of": "finalized block 136111009",
+     "supply": "1862957505.002601"
+    },
+    {
+     "provider": "bsc-dataseed1.defibit.io",
+     "as_of": "finalized block 136111009",
+     "supply": "1862957505.002601"
+    }
+   ]
+  },
+  {
+   "chain": "solana",
+   "class": "USYC",
+   "address": "7LWanZteUKtvFjv4MHYgKXXdAuCQYFPJysL9pxxdRQGn",
+   "supply": "122.481545",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "api.mainnet-beta.solana.com",
+     "as_of": "finalized slot 474701964",
+     "supply": "122.481545"
+    },
+    {
+     "provider": "solana-mainnet.gateway.tatum.io",
+     "as_of": "finalized slot 474701977",
+     "supply": "122.481545"
+    }
+   ]
+  },
+  {
+   "chain": "noble",
+   "class": "USYC",
+   "address": "uusyc",
+   "supply": "0.000111",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "rest.cosmos.directory",
+     "as_of": "latest block",
+     "supply": "0.000111"
+    },
+    {
+     "provider": "api.noble.xyz",
+     "as_of": "latest block",
+     "supply": "0.000111"
+    }
+   ]
+  },
+  {
+   "chain": "near",
+   "class": "USYC",
+   "address": "usyc.near",
+   "supply": "0.000000",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "rpc.mainnet.near.org",
+     "as_of": "final block 226511414",
+     "supply": "0.000000"
+    },
+    {
+     "provider": "free.rpc.fastnear.com",
+     "as_of": "final block 226511414",
+     "supply": "0.000000"
+    }
+   ]
+  }
+ ]
+}

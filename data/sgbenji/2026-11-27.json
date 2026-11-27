@@ -1,0 +1,44 @@
+{
+ "fund": "SGBENJI",
+ "taken": "2026-11-27T21:30Z",
+ "rows": [
+  {
+   "chain": "xrpl",
+   "class": "sgBENJI",
+   "address": "064E27366D15D1F5614B4D4E3183F835BCD62E7F6FD9FFD8",
+   "supply": "194617795.4184529",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "xrplcluster.com",
+     "as_of": "validated ledger 108613956",
+     "supply": "194617795.4184529"
+    },
+    {
+     "provider": "s1.ripple.com:51234",
+     "as_of": "validated ledger 108613956",
+     "supply": "194617795.4184529"
+    }
+   ]
+  },
+  {
+   "chain": "stellar",
+   "class": "sgBENJI",
+   "address": "sgBENJI-GAGICV3VBJSKKH5H5MQQIUTUP462YVHC23KUHZY6FJERRJFBDIVZBM5C",
+   "supply": "36005637.5132740",
+   "status": "ok",
+   "reads": [
+    {
+     "provider": "horizon.stellar.org",
+     "as_of": "ledger 65705817",
+     "supply": "36005637.5132740"
+    },
+    {
+     "provider": "horizon.stellar.lobstr.co",
+     "as_of": "ledger 65705817",
+     "supply": "36005637.5132740"
+    }
+   ]
+  }
+ ]
+}
